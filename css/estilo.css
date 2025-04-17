@@ -1,0 +1,87 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f4fb;
+    color: #333;
+  }
+  
+  header {
+    background-color: #6A1B9A;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+  }
+  .container-center{
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .logo {
+    width: 160px;
+    top: 20px;
+    left: 30px;
+    border-radius: 0 50% 0 0; /* top-left, top-right, bottom-right, bottom-left */
+  }
+  .container-title{
+    width: 80%;
+    float: left;
+  }
+  
+  .foto-perfil {
+    width: 160px;
+    border-radius: 50%;
+    float: right;
+    margin: 10px 0 20px 30px;
+  }
+  
+  nav {
+    background-color: #8E24AA;
+    text-align: center;
+    padding: 15px;
+  }
+  
+  nav a {
+    color: white;
+    margin: 0 20px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 6px;
+  }
+  
+  nav a.active {
+    background-color: #BA68C8;
+  }
+  
+  nav a:hover {
+    background-color: #CE93D8;
+  }
+  
+  main {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  section {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 20px;
+    display: none;
+  }
+  
+  section.active {
+    display: block;
+  }
+  
+  footer {
+    background-color: #6A1B9A;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+  }
