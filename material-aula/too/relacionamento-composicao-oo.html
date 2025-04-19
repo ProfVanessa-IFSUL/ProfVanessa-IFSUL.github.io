@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOO - Aula 2 - Relacionamentos OO</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+
+  <link rel="stylesheet" href="../../css/estilo.css">
+</head>
+
+<body class="stackedit">
+  <header>
+    <div class="container-center">
+      <img src="../../img/Foto-perfil.jpeg" alt="Minha foto" class="logo">
+      <div class="container-title">
+        <h1>Profª Vanessa Lago Machado - IFSul</h1>
+        <p>Espaço Acadêmico de Projetos, Disciplinas e Publicações</p>
+      </div>
+    </div>
+  </header>
+
+
+
+
+  <div class="container-disciplina">
+
+    <div class="stackedit__html">
+      <h1>Material de Aula</h1>
+      <h3 id="curso-bacharelado-em-ciência-da-computação"><b>Curso:</b> Bacharelado em Ciência da Computação</h3>
+      <h3 id="disciplina-tecnologia-orientada-a-objetos-too"><b>Disciplina:</b> Tecnologia Orientada a Objetos (TOO)
+      </h3>
+
+    </div>
+
+    <hr>
+    <h1 id="orientação-a-objetos">Orientação a Objetos</h1>
+    <h2 id="aula-2---relacionamento-entre-objetos-composição">Aula 2 - Relacionamento entre Objetos (Composição)</h2>
+    <p>Na programação orientada a objetos, <strong>relacionar classes</strong> é uma forma natural de <strong>modelar o
+        mundo real</strong>, onde objetos frequentemente dependem ou contêm outros objetos.</p>
+    <p>Uma classe pode ter <strong>atributos que são instâncias de outras classes</strong>, estabelecendo um
+      <strong>relacionamento entre elas</strong>.
+    </p>
+    <hr>
+    <h3 id="exemplo-pessoa-e-avaliacaofisica">Exemplo: Pessoa e AvaliacaoFisica</h3>
+    <p>No exemplo abaixo, temos duas classes:</p>
+    <ul>
+      <li>
+        <p><code>Pessoa</code>: representa uma pessoa com nome, data de nascimento e CPF.</p>
+      </li>
+      <li>
+        <p><code>AvaliacaoFisica</code>: representa uma avaliação com dados de saúde.</p>
+      </li>
+    </ul>
+    <p>A avaliação física está <strong>relacionada a uma única pessoa</strong>, ou seja, no contexto fictício de
+      Acadêmia cada aluno deve passar períodicamente por uma avaliação física, que a partir disso poderá gerar novas
+      prescrições de treinos.</p>
+    <pre
+      class=" language-mermaid"><svg id="mermaid-svg-QPfhhv0OP09h9zbE" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="299.23046875" style="max-width: 178.15625px;" viewBox="-20 -20 178.15625 299.23046875"><style>#mermaid-svg-QPfhhv0OP09h9zbE{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#000000;}#mermaid-svg-QPfhhv0OP09h9zbE .error-icon{fill:#552222;}#mermaid-svg-QPfhhv0OP09h9zbE .error-text{fill:#552222;stroke:#552222;}#mermaid-svg-QPfhhv0OP09h9zbE .edge-thickness-normal{stroke-width:2px;}#mermaid-svg-QPfhhv0OP09h9zbE .edge-thickness-thick{stroke-width:3.5px;}#mermaid-svg-QPfhhv0OP09h9zbE .edge-pattern-solid{stroke-dasharray:0;}#mermaid-svg-QPfhhv0OP09h9zbE .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-svg-QPfhhv0OP09h9zbE .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-svg-QPfhhv0OP09h9zbE .marker{fill:#666;stroke:#666;}#mermaid-svg-QPfhhv0OP09h9zbE .marker.cross{stroke:#666;}#mermaid-svg-QPfhhv0OP09h9zbE svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-svg-QPfhhv0OP09h9zbE g.classGroup text{fill:#999;fill:#111111;stroke:none;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:10px;}#mermaid-svg-QPfhhv0OP09h9zbE g.classGroup text .title{font-weight:bolder;}#mermaid-svg-QPfhhv0OP09h9zbE .classTitle{font-weight:bolder;}#mermaid-svg-QPfhhv0OP09h9zbE .node rect,#mermaid-svg-QPfhhv0OP09h9zbE .node circle,#mermaid-svg-QPfhhv0OP09h9zbE .node ellipse,#mermaid-svg-QPfhhv0OP09h9zbE .node polygon,#mermaid-svg-QPfhhv0OP09h9zbE .node path{fill:#eee;stroke:#999;stroke-width:1px;}#mermaid-svg-QPfhhv0OP09h9zbE .divider{stroke:#999;stroke:1;}#mermaid-svg-QPfhhv0OP09h9zbE g.clickable{cursor:pointer;}#mermaid-svg-QPfhhv0OP09h9zbE g.classGroup rect{fill:#eee;stroke:#999;}#mermaid-svg-QPfhhv0OP09h9zbE g.classGroup line{stroke:#999;stroke-width:1;}#mermaid-svg-QPfhhv0OP09h9zbE .classLabel .box{stroke:none;stroke-width:0;fill:#eee;opacity:0.5;}#mermaid-svg-QPfhhv0OP09h9zbE .classLabel .label{fill:#999;font-size:10px;}#mermaid-svg-QPfhhv0OP09h9zbE .relation{stroke:#666;stroke-width:1;fill:none;}#mermaid-svg-QPfhhv0OP09h9zbE .dashed-line{stroke-dasharray:3;}#mermaid-svg-QPfhhv0OP09h9zbE #compositionStart,#mermaid-svg-QPfhhv0OP09h9zbE .composition{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-QPfhhv0OP09h9zbE #compositionEnd,#mermaid-svg-QPfhhv0OP09h9zbE .composition{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-QPfhhv0OP09h9zbE #dependencyStart,#mermaid-svg-QPfhhv0OP09h9zbE .dependency{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-QPfhhv0OP09h9zbE #dependencyStart,#mermaid-svg-QPfhhv0OP09h9zbE .dependency{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-QPfhhv0OP09h9zbE #extensionStart,#mermaid-svg-QPfhhv0OP09h9zbE .extension{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-QPfhhv0OP09h9zbE #extensionEnd,#mermaid-svg-QPfhhv0OP09h9zbE .extension{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-QPfhhv0OP09h9zbE #aggregationStart,#mermaid-svg-QPfhhv0OP09h9zbE .aggregation{fill:#eee !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-QPfhhv0OP09h9zbE #aggregationEnd,#mermaid-svg-QPfhhv0OP09h9zbE .aggregation{fill:#eee !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-QPfhhv0OP09h9zbE .edgeTerminals{font-size:11px;}#mermaid-svg-QPfhhv0OP09h9zbE:root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#mermaid-svg-QPfhhv0OP09h9zbE class{fill:apa;}</style><g></g><defs><marker id="extensionStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 1,7 L18,13 V 1 Z"></path></marker></defs><defs><marker id="extensionEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 1,1 V 13 L18,7 Z"></path></marker></defs><defs><marker id="compositionStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="compositionEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="aggregationStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="aggregationEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="dependencyStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 5,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="dependencyEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"></path></marker></defs><g id="classid-Pessoa-200" class="classGroup" transform="translate(0,179.58984375 )"><rect x="0" y="0" width="138.15625" height="79.640625" class=" "></rect><text y="15" x="0"><tspan class="title" x="53.703125">Pessoa</tspan></text><line x1="0" y1="21.5" y2="21.5" x2="138.15625"></line><text x="5" y="31.5" fill="white" class="classText"><tspan x="5">-String nome</tspan><tspan x="5" dy="10">-LocalDate dataNascimento</tspan><tspan x="5" dy="10">-String CPF</tspan></text><line x1="0" y1="58.05078125" y2="58.05078125" x2="138.15625"></line><text x="5" y="73.05078125" fill="white" class="classText"><tspan x="5">+exibirDados() : String</tspan></text></g><g id="classid-AvaliacaoFisica-201" class="classGroup" transform="translate(9.48828125,0 )"><rect x="0" y="0" width="119.1796875" height="129.58984375" class=" "></rect><text y="15" x="0"><tspan class="title" x="24.25390625">AvaliacaoFisica</tspan></text><line x1="0" y1="21.5" y2="21.5" x2="119.1796875"></line><text x="5" y="31.5" fill="white" class="classText"><tspan x="5">-Pessoa aluno</tspan><tspan x="5" dy="10">-LocalDate data</tspan><tspan x="5" dy="10">-double peso</tspan><tspan x="5" dy="10">-double altura</tspan><tspan x="5" dy="10">-int idade</tspan><tspan x="5" dy="10">-double imc</tspan></text><line x1="0" y1="88" y2="88" x2="119.1796875"></line><text x="5" y="103" fill="white" class="classText"><tspan x="5">+calcularIMC() : double</tspan><tspan x="5" dy="10">+calcularIdade() : void</tspan><tspan x="5" dy="10">+exibirDados() : String</tspan></text></g><path d="M69.078125,129.58984375L69.078125,133.75651041666666C69.078125,137.92317708333334,69.078125,146.25651041666666,69.078125,154.58984375C69.078125,162.92317708333334,69.078125,171.25651041666666,69.078125,175.42317708333334L69.078125,179.58984375" id="edge92" class="relation" marker-end="url(#dependencyEnd)"></path></svg></pre>
+    <h4 id="explicação-do-relacionamento">Explicação do Relacionamento</h4>
+    <p>Neste caso, a classe AvaliacaoFisica <strong>possui um atributo do tipo Pessoa</strong>, representando o aluno ao
+      qual a avaliação pertence:</p>
+    <pre class=" language-java"><code class="prism  language-java"><span class="token keyword">private</span> Pessoa aluno<span class="token punctuation">;</span>
+</code></pre>
+    <p>Isso representa uma <strong>relação de “possui”</strong>:</p>
+    <blockquote>
+      <p>“Uma avaliação física pertence a uma pessoa (a um aluno)”.</p>
+    </blockquote>
+    <p>Essa relação pode ser chamada de:</p>
+    <ul>
+      <li>
+        <p><strong>Composição</strong> – porque a AvaliacaoFisica não faz sentido existir <strong>sem estar vinculada a
+            uma Pessoa</strong>.</p>
+      </li>
+      <li>
+        <p>Representa uma <strong>relação forte</strong> entre objetos.</p>
+      </li>
+      <li>
+        <p>Quando a AvaliacaoFisica é destruída, o vínculo com Pessoa também se encerra no contexto da avaliação.</p>
+      </li>
+    </ul>
+    <p>Logo, para modelagem da Avaliação Física, a classe <code>AvaliacaoFisica</code> deve <strong>possuir um objeto
+        <code>Pessoa</code> como atributo</strong>, referenciando a quem corresponde a avaliação realizada.</p>
+    <h4 id="conclusão">Conclusão</h4>
+    <ul>
+      <li>Modelar uma classe com <strong>outra classe como atributo</strong> permite representar a realidade com mais
+        precisão.</li>
+      <li>O relacionamento entre objetos torna o código mais <strong>modular</strong>, <strong>reutilizável</strong> e
+        <strong>fácil de manter</strong>.
+      </li>
+      <li>A composição é uma forma poderosa de <strong>organizar os dados e comportamentos do sistema</strong>,
+        estabelecendo relações <strong>naturais entre os objetos</strong>.</li>
+    </ul>
+    <hr>
+    <h3 id="atividade-–-classe-avaliacaofisica">Atividade – Classe AvaliacaoFisica</h3>
+    <p>Implemente a classe <code>AvaliacaoFisica</code> em Java, <strong>associando-a a uma instância da classe
+        <code>Pessoa</code></strong>, representando o aluno avaliado. A atividade visa exercitar os conceitos de
+      <strong>encapsulamento</strong>, <strong>relacionamento entre objetos</strong>, e a manipulação de
+      <strong>datas</strong> e <strong>métodos de instância</strong>.
+    </p>
+    <hr>
+    <h4 id="requisitos-de-implementação">Requisitos de Implementação</h4>
+    <ol>
+      <li>
+        <p><strong>Encapsular todos os atributos da classe AvaliacaoFisica</strong></p>
+        <ul>
+          <li>Use <code>private</code> para os atributos.</li>
+          <li>Crie métodos <code>get</code> e <code>set</code> para os atributos conforme julgar necessário.</li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Associar um aluno via construtor</strong></p>
+        <ul>
+          <li>O objeto <code>Pessoa</code> (aluno) <strong>deve ser passado como parâmetro</strong> no momento da
+            criação de uma <code>AvaliacaoFisica</code>.</li>
+          <li>Exemplo:
+            <pre class=" language-java"><code class="prism  language-java">Pessoa p1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Pessoa</span><span class="token punctuation">(</span><span class="token string">"Vivente"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+AvaliacaoFisica a1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AvaliacaoFisica</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Inicializar a data da avaliação com a data atual</strong> no próprio construtor</p>
+      </li>
+      <li>
+        <p>Ajuste o encapsulamento a fim de:</p>
+        <ul>
+          <li><strong>permitir alteração posterior da data da avaliação</strong></li>
+          <li><strong>Não permitir alteração do aluno após a criação</strong>, apenas a visualização</li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Implementar o método <code>calcularIMC()</code></strong></p>
+        <ul>
+          <li>Fórmula: <code>peso / (altura * altura)</code></li>
+          <li>Retornar um <code>double</code>.</li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Implementar o método <code>calcularIdade()</code></strong></p>
+        <ul>
+          <li>Calcular a idade com base na <code>dataNascimento</code> da <code>Pessoa</code>.</li>
+          <li>Atualizar o atributo <code>idade</code> na <code>AvaliacaoFisica</code>.</li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Criar o método <code>exibirDados()</code></strong></p>
+        <ul>
+          <li>Deve mostrar:
+            <ul>
+              <li>Nome do aluno</li>
+              <li>Idade</li>
+              <li>Data da avaliação (formatada)</li>
+              <li>IMC calculado</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+
+  </div>
+  <div id="nav-footer"><h4>Materiais TOO</h4>
+    <ul>
+      <li><a href="introducao-oo.html">Aula 1 - Introdução a Orientação Objetos</a></li>
+      <li><a href="#">Aula 2 - Relacionamentos entre Objetos (Composição)</a></li>
+    </ul>
+  </div>
+
+
+
+  <footer>
+    <p>© 2025 Profª Vanessa Lago Machado - IFSul • Material de aula</p>
+  </footer>
+</body>
+
+</html>

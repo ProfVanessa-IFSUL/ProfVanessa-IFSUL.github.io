@@ -118,3 +118,44 @@ body {
 .container-disciplina table{
     border: lightgray 1px solid;
 }
+
+/*   Navegação Rodapé   */
+#nav-footer {
+    background-color: #f3e5f5; /* lilás claro */
+    border-top: 2px solid #8E24AA; /* lilás mais escuro */
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 1rem;
+    text-align: center;
+    color: #4a148c;
+    margin-bottom: -30px;
+  }
+  
+  #nav-footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+  }
+  
+  #nav-footer li {
+    margin: 5px 0;
+  }
+  
+  #nav-footer a {
+    text-decoration: none;
+    color: #6A1B9A;
+    font-weight: bold;
+    font-size: 11pt;
+  }
+  
+  #nav-footer a:hover {
+    text-decoration: underline;
+    color: #ab47bc;
+  }
+
+  #nav-footer h4 {
+    font-size: 14pt;
+    font-family:revert;
+    color: #BA68C8;
+    margin: 0;
+  }
