@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOO - Aula 2 - RelacionamentoLista OO</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <link rel="stylesheet" href="../../css/estilo.css">
+</head>
+
+<body class="stackedit">
+  <header>
+    <div class="container-center">
+      <img src="../../img/Foto-perfil.jpeg" alt="Minha foto" class="logo">
+      <div class="container-title">
+        <h1>Profª Vanessa Lago Machado - IFSul</h1>
+        <p>Espaço Acadêmico de Projetos, Disciplinas e Publicações</p>
+      </div>
+    </div>
+  </header>
+
+
+
+
+  <div class="container-disciplina">
+    <div class="stackedit__html">
+      <h1>Material de Aula</h1>
+      <h3 id="curso-bacharelado-em-ciência-da-computação"><b>Curso:</b> Bacharelado em Ciência da Computação</h3>
+      <h3 id="disciplina-tecnologia-orientada-a-objetos-too"><b>Disciplina:</b> Tecnologia Orientada a Objetos (TOO)
+      </h3>
+
+    </div>
+
+    <h1 id="orientação-a-objetos">Orientação a Objetos</h1>
+    <h2 id="aula-2--parte-2-">Aula 2 ( parte 2 )</h2>
+    <h3 id="relacionamento-entre-objetos-composição-de-coleção">Relacionamento entre Objetos (<strong>composição de
+        coleção</strong>)</h3>
+    <p><strong>Tema:</strong> Armazenando múltiplos objetos em uma classe (Composição com coleção)</p>
+    <p>Na modelagem orientada a objetos, é comum que <strong>um objeto esteja relacionado a vários outros
+        objetos</strong>. Esse tipo de relação é conhecido como <strong>relacionamento de um para muitos (1:N)</strong>.
+    </p>
+    <hr>
+    <h3 id="exemplo-pessoa-e-avaliacaofisica">Exemplo: Pessoa e AvaliacaoFisica</h3>
+    <p>No exemplo abaixo, temos duas classes:</p>
+    <ul>
+      <li>
+        <p><code>Pessoa</code>: representa uma pessoa com nome, data de nascimento e CPF.</p>
+      </li>
+      <li>
+        <p><code>AvaliacaoFisica</code>: representa uma avaliação com dados de saúde.</p>
+      </li>
+    </ul>
+    <p>A avaliação física está <strong>relacionada a uma única pessoa</strong>, ou seja, no contexto fictício de
+      Acadêmia cada aluno deve passar períodicamente por uma avaliação física, que a partir disso poderá gerar novas
+      prescrições de treinos.</p>
+    <p>O diagrama a seguir representa o relacionamento entre as classes <code>Pessoa</code> e
+      <code>AvaliacaoFisica</code>. Cada <code>Pessoa</code> pode ter <strong>zero ou mais avaliações físicas</strong>
+      associadas, caracterizando uma <strong>composição 1:N</strong>.</p>
+    <pre
+      class=" language-mermaid"><svg id="mermaid-svg-dagdwIp2czbcUo7y" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="329.1796875" style="max-width: 231.84375px;" viewBox="-20 -20 231.84375 329.1796875"><style>#mermaid-svg-dagdwIp2czbcUo7y{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#000000;}#mermaid-svg-dagdwIp2czbcUo7y .error-icon{fill:#552222;}#mermaid-svg-dagdwIp2czbcUo7y .error-text{fill:#552222;stroke:#552222;}#mermaid-svg-dagdwIp2czbcUo7y .edge-thickness-normal{stroke-width:2px;}#mermaid-svg-dagdwIp2czbcUo7y .edge-thickness-thick{stroke-width:3.5px;}#mermaid-svg-dagdwIp2czbcUo7y .edge-pattern-solid{stroke-dasharray:0;}#mermaid-svg-dagdwIp2czbcUo7y .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-svg-dagdwIp2czbcUo7y .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-svg-dagdwIp2czbcUo7y .marker{fill:#666;stroke:#666;}#mermaid-svg-dagdwIp2czbcUo7y .marker.cross{stroke:#666;}#mermaid-svg-dagdwIp2czbcUo7y svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-svg-dagdwIp2czbcUo7y g.classGroup text{fill:#999;fill:#111111;stroke:none;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:10px;}#mermaid-svg-dagdwIp2czbcUo7y g.classGroup text .title{font-weight:bolder;}#mermaid-svg-dagdwIp2czbcUo7y .classTitle{font-weight:bolder;}#mermaid-svg-dagdwIp2czbcUo7y .node rect,#mermaid-svg-dagdwIp2czbcUo7y .node circle,#mermaid-svg-dagdwIp2czbcUo7y .node ellipse,#mermaid-svg-dagdwIp2czbcUo7y .node polygon,#mermaid-svg-dagdwIp2czbcUo7y .node path{fill:#eee;stroke:#999;stroke-width:1px;}#mermaid-svg-dagdwIp2czbcUo7y .divider{stroke:#999;stroke:1;}#mermaid-svg-dagdwIp2czbcUo7y g.clickable{cursor:pointer;}#mermaid-svg-dagdwIp2czbcUo7y g.classGroup rect{fill:#eee;stroke:#999;}#mermaid-svg-dagdwIp2czbcUo7y g.classGroup line{stroke:#999;stroke-width:1;}#mermaid-svg-dagdwIp2czbcUo7y .classLabel .box{stroke:none;stroke-width:0;fill:#eee;opacity:0.5;}#mermaid-svg-dagdwIp2czbcUo7y .classLabel .label{fill:#999;font-size:10px;}#mermaid-svg-dagdwIp2czbcUo7y .relation{stroke:#666;stroke-width:1;fill:none;}#mermaid-svg-dagdwIp2czbcUo7y .dashed-line{stroke-dasharray:3;}#mermaid-svg-dagdwIp2czbcUo7y #compositionStart,#mermaid-svg-dagdwIp2czbcUo7y .composition{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-dagdwIp2czbcUo7y #compositionEnd,#mermaid-svg-dagdwIp2czbcUo7y .composition{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-dagdwIp2czbcUo7y #dependencyStart,#mermaid-svg-dagdwIp2czbcUo7y .dependency{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-dagdwIp2czbcUo7y #dependencyStart,#mermaid-svg-dagdwIp2czbcUo7y .dependency{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-dagdwIp2czbcUo7y #extensionStart,#mermaid-svg-dagdwIp2czbcUo7y .extension{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-dagdwIp2czbcUo7y #extensionEnd,#mermaid-svg-dagdwIp2czbcUo7y .extension{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-dagdwIp2czbcUo7y #aggregationStart,#mermaid-svg-dagdwIp2czbcUo7y .aggregation{fill:#eee !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-dagdwIp2czbcUo7y #aggregationEnd,#mermaid-svg-dagdwIp2czbcUo7y .aggregation{fill:#eee !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-dagdwIp2czbcUo7y .edgeTerminals{font-size:11px;}#mermaid-svg-dagdwIp2czbcUo7y:root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#mermaid-svg-dagdwIp2czbcUo7y class{fill:apa;}</style><g></g><defs><marker id="extensionStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 1,7 L18,13 V 1 Z"></path></marker></defs><defs><marker id="extensionEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 1,1 V 13 L18,7 Z"></path></marker></defs><defs><marker id="compositionStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="compositionEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="aggregationStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="aggregationEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="dependencyStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 5,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="dependencyEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"></path></marker></defs><g id="classid-Pessoa-599" class="classGroup" transform="translate(0,0 )"><rect x="0" y="0" width="191.84375" height="109.58984375" class=" "></rect><text y="15" x="0"><tspan class="title" x="80.546875">Pessoa</tspan></text><line x1="0" y1="21.5" y2="21.5" x2="191.84375"></line><text x="5" y="31.5" fill="white" class="classText"><tspan x="5">-String nome</tspan><tspan x="5" dy="10">-LocalDate dataNascimento</tspan><tspan x="5" dy="10">-String CPF</tspan><tspan x="5" dy="10">-List&lt;AvaliacaoFisica&gt; avaliacoes</tspan></text><line x1="0" y1="68" y2="68" x2="191.84375"></line><text x="5" y="83" fill="white" class="classText"><tspan x="5">+exibirDados() : String</tspan><tspan x="5" dy="10">+adicionarAvaliacao() : void</tspan><tspan x="5" dy="10">+getAvaliacoes() : List&lt;AvaliacaoFisica&gt;</tspan></text></g><g id="classid-AvaliacaoFisica-600" class="classGroup" transform="translate(36.33203125,159.58984375 )"><rect x="0" y="0" width="119.1796875" height="129.58984375" class=" "></rect><text y="15" x="0"><tspan class="title" x="24.25390625">AvaliacaoFisica</tspan></text><line x1="0" y1="21.5" y2="21.5" x2="119.1796875"></line><text x="5" y="31.5" fill="white" class="classText"><tspan x="5">-Pessoa aluno</tspan><tspan x="5" dy="10">-LocalDate data</tspan><tspan x="5" dy="10">-double peso</tspan><tspan x="5" dy="10">-double altura</tspan><tspan x="5" dy="10">-int idade</tspan><tspan x="5" dy="10">-double imc</tspan></text><line x1="0" y1="88" y2="88" x2="119.1796875"></line><text x="5" y="103" fill="white" class="classText"><tspan x="5">+calcularIMC() : double</tspan><tspan x="5" dy="10">+calcularIdade() : void</tspan><tspan x="5" dy="10">+exibirDados() : String</tspan></text></g><path d="M95.921875,109.58984375L95.921875,113.75651041666667C95.921875,117.92317708333333,95.921875,126.25651041666667,95.921875,134.58984375C95.921875,142.92317708333334,95.921875,151.25651041666666,95.921875,155.42317708333334L95.921875,159.58984375" id="edge112" class="relation" marker-start="url(#compositionStart)"></path></svg></pre>
+    <h4 id="explicação-do-relacionamento">Explicação do Relacionamento</h4>
+    <p><strong>Explicação</strong></p>
+    <p>A classe Pessoa contém:</p>
+    <ul>
+      <li>
+        <p>Dados pessoais (nome, dataNascimento, CPF)</p>
+      </li>
+      <li>
+        <p>Uma <strong>lista de avaliações físicas</strong> (List)</p>
+      </li>
+      <li>
+        <p>Métodos para adicionar e exibir avaliações</p>
+      </li>
+    </ul>
+    <p>A classe AvaliacaoFisica:</p>
+    <ul>
+      <li>
+        <p>Está associada a <strong>uma única Pessoa</strong> (aluno)</p>
+      </li>
+      <li>
+        <p>Possui atributos para data, peso, altura, idade e IMC</p>
+      </li>
+      <li>
+        <p>Contém métodos para calcular IMC e idade com base na data de nascimento do aluno</p>
+      </li>
+    </ul>
+    <h4 id="conclusão">Conclusão</h4>
+    <p>O relacionamento de <strong>composição com coleção</strong> é essencial para modelar situações onde <strong>um
+        objeto precisa armazenar múltiplas instâncias relacionadas a ele</strong>.</p>
+    <p>Neste exemplo, a classe <code>Pessoa</code> representa um aluno, e cada avaliação física realizada é representada
+      por uma instância da classe <code>AvaliacaoFisica</code>. Com isso, conseguimos manter um <strong>histórico
+        completo</strong> das avaliações dentro da própria classe <code>Pessoa</code>.</p>
+    <p>Através de métodos específicos (como <code>adicionarAvaliacao()</code> e <code>getAvaliacoes()</code>), podemos
+      <strong>organizar, acessar e manipular</strong> esse conjunto de objetos com segurança e clareza.</p>
+    <h4 id="atividade-prática-–-lista-de-avaliações">Atividade Prática – Lista de Avaliações</h4>
+    <p>Implemente a relação entre AvaliacaoFisica e Pessoa a fim de permitir manter o histórico de avaliações realizadas
+      sobre um determinado aluno.</p>
+    <ol>
+      <li>
+        <p>Na classe <code>Pessoa</code> adicione o atributo:</p>
+        <ul>
+          <li><code>List&lt;AvaliacaoFisica&gt; avaliacoes</code> com o devido encapsulamento (atributo
+            <code>private</code>) e crie o método <code>getAvaliacoes()</code> para retornar a lista.</li>
+        </ul>
+      </li>
+      <li>
+        <p>Nos construtores da classe, inicialize a lista:</p>
+      </li>
+    </ol>
+    <pre class=" language-java"><code class="prism  language-java"><span class="token keyword">this</span><span class="token punctuation">.</span>avaliacoes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+    <ol start="3">
+      <li>
+        <p>Crie o método <code>adicionarAvaliacao(AvaliacaoFisica avaliacao)</code> de modo que permita adicionar uma
+          avaliação a lista.</p>
+      </li>
+      <li>
+        <p>Ajuste o método <code>exibirDados()</code> para mostrar também a quantidade de avaliações.</p>
+      </li>
+      <li>
+        <p>Teste a implementação na classe <code>Teste</code></p>
+      </li>
+    </ol>
+    <ul>
+      <li>Crie um aluno</li>
+      <li>Adicione 2 avaliações físicas para ele</li>
+      <li>Mostre o método <code>exibirDados()</code> do aluno cadastrado</li>
+    </ul>
+    <p><strong>Exemplo de Teste</strong></p>
+    <pre class=" language-java"><code class="prism  language-java">Pessoa p1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Pessoa</span><span class="token punctuation">(</span><span class="token string">"Juka"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+AvaliacaoFisica a1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AvaliacaoFisica</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+AvaliacaoFisica a2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AvaliacaoFisica</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+p1<span class="token punctuation">.</span><span class="token function">addAvaliacao</span><span class="token punctuation">(</span>a1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+p1<span class="token punctuation">.</span><span class="token function">addAvaliacao</span><span class="token punctuation">(</span>a2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>p1<span class="token punctuation">.</span><span class="token function">exibirDados</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+    <hr>
+  </div>
+  </div>
+
+  <div id="nav-footer"><h4>Materiais TOO</h4>
+    <ul>
+      <li><a href="introducao-oo.html">Aula 1 - Introdução a Orientação Objetos</a></li>
+      <li><a href="relacionamento-composicao-oo.html">Aula 2 - Relacionamentos entre Objetos (Composição)</a></li>
+      <li><a href="#">Aula 2 - Relacionamentos entre Objetos (Composição de Coleção 1:N)</a></li>
+    </ul>
+    <h4>Dicas Extras</h4>
+    <ul>
+      <li><a href="manipulacao-arraylist.html">Manipulação de Listas - Uso da classe ArrayList</a></li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>© 2025 Profª Vanessa Lago Machado - IFSul • Material de aula</p>
+  </footer>
+
+</body>
+
+</html>

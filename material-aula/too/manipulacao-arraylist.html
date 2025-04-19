@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOO - Manipulação ArrayList</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <link rel="stylesheet" href="../../css/estilo.css">
+</head>
+
+<body class="stackedit">
+  <header>
+    <div class="container-center">
+      <img src="../../img/Foto-perfil.jpeg" alt="Minha foto" class="logo">
+      <div class="container-title">
+        <h1>Profª Vanessa Lago Machado - IFSul</h1>
+        <p>Espaço Acadêmico de Projetos, Disciplinas e Publicações</p>
+      </div>
+    </div>
+  </header>
+
+
+
+
+  <div class="container-disciplina">
+    <div class="stackedit__html">
+      <h1>Material de Aula</h1>
+      <h3 id="curso-bacharelado-em-ciência-da-computação"><b>Curso:</b> Bacharelado em Ciência da Computação</h3>
+      <h3 id="disciplina-tecnologia-orientada-a-objetos-too"><b>Disciplina:</b> Tecnologia Orientada a Objetos (TOO)
+      </h3>
+
+    </div>
+
+<h1 id="orientação-a-objetos">Orientação a Objetos</h1>
+<h3 id="dica-extra-trabalhando-com-lista-e-classe-arraylist"><b>Dica Extra: Trabalhando com Lista e classe ArrayList</b></h3>
+<p>Em Java, para armazenar <strong>múltiplos objetos relacionados</strong> (como várias avaliações para uma pessoa), usamos <strong>listas</strong>. O tipo mais comum é o <code>ArrayList</code>.</p>
+<p>A classe <code>ArrayList</code> é um tipo de lista (estrutura linear estudada que vocês viram em Estrutura de Dados) que permite a manipulação dinâmica de elementos. Podemos criar listas que armazenam objetos de qualquer tipo.</p>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>ArrayList<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>List<span class="token punctuation">;</span>
+
+List itens <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+itens<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"Ana"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+itens<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"João"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+itens<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// permitido, pois é uma lista "não tipada"</span>
+
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Itens cadastrados: "</span> <span class="token operator">+</span> itens<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="lista-com-tipo-definido-genérica"><strong>Lista com tipo definido (genérica)</strong></h3>
+<p>É possível definir o tipo de elementos que a lista deve aceitar:</p>
+<pre class=" language-java"><code class="prism  language-java">List<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> itens <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+itens<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"Ana"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+itens<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"João"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// itens.add(10); // ❌ erro de compilação</span>
+</code></pre>
+<p>Usar <strong>listas genéricas</strong> aumenta a segurança e clareza do código, evitando inserções indesejadas.</p>
+<h3 id="métodos-mais-comuns-da-classe-arraylist">Métodos mais comuns da classe <code>ArrayList</code></h3>
+
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>add(elemento)</code></td>
+<td>Adiciona um elemento ao final da lista.</td>
+</tr>
+<tr>
+<td><code>get(indice)</code></td>
+<td>Retorna o elemento que está na posição indicada.</td>
+</tr>
+<tr>
+<td><code>remove(indice)</code></td>
+<td>Remove o elemento da posição indicada.</td>
+</tr>
+<tr>
+<td><code>remove(elemento)</code></td>
+<td>Remove a primeira ocorrência do objeto na lista.</td>
+</tr>
+<tr>
+<td><code>size()</code></td>
+<td>Retorna a quantidade de elementos na lista.</td>
+</tr>
+<tr>
+<td><code>isEmpty()</code></td>
+<td>Retorna <code>true</code> se a lista estiver vazia.</td>
+</tr>
+<tr>
+<td><code>contains(elemento)</code></td>
+<td>Retorna <code>true</code> se a lista contiver o elemento especificado.</td>
+</tr>
+<tr>
+<td><code>clear()</code></td>
+<td>Remove todos os elementos da lista.</td>
+</tr>
+</tbody>
+</table><hr>
+<p><strong>Exemplo com objetos personalizados</strong></p>
+<pre class=" language-java"><code class="prism  language-java">List<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> nomes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+nomes<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"Ana"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+nomes<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"Juka"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Nomes cadastrados: "</span> <span class="token operator">+</span> nomes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Total de nomes cadastrados: "</span> <span class="token operator">+</span> nomes<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// removendo um elemento</span>
+nomes<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">"Ana"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Nomes cadastrados: "</span> <span class="token operator">+</span> nomes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Total de nomes cadastrados: "</span> <span class="token operator">+</span> nomes<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</div>
+</div>
+
+<div id="nav-footer"><h4>Materiais TOO</h4>
+  <ul>
+    <li><a href="introducao-oo.html">Aula 1 - Introdução a Orientação Objetos</a></li>
+    <li><a href="relacionamento-composicao-oo.html">Aula 2 - Relacionamentos entre Objetos (Composição)</a></li>
+    <li><a href="relacionamento-lista-oo.html">Aula 2 - Relacionamentos entre Objetos (Composição de Coleção 1:N)</a></li>
+  </ul>
+  <h4>Dicas Extras</h4>
+  <ul>
+    <li><a href="#">Manipulação de Listas - Uso da classe ArrayList</a></li>
+  </ul>
+</div>
+
+<footer>
+    <p>© 2025 Profª Vanessa Lago Machado - IFSul • Material de aula</p>
+</footer>
+</body>
+
+</html>
