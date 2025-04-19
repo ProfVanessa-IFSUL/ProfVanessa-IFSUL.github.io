@@ -85,3 +85,36 @@ body {
     padding: 20px;
     margin-top: 30px;
   }
+
+
+  .container-disciplina {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .container-disciplina h1{
+    font-family: cursive;
+  }
+
+  .container-disciplina h3{
+    line-height: 1.33;
+    margin: 0;
+    font-weight: normal;
+  }
+  .stackedit__html {
+    margin-bottom: 10px;
+    background-color: #f0f0f0;
+    border: slategray  2px;
+    border-style: dashed;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .container-disciplina hr{
+    margin: 10px 0;
+  }
+
+.container-disciplina table{
+    border: lightgray 1px solid;
+}

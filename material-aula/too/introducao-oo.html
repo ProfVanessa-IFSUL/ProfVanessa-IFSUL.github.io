@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOO - Introdução OO</title>
+    <link rel="stylesheet" href="https://stackedit.io/style.css" />
+    <link rel="stylesheet" href="../../css/estilo.css">
+</head>
+
+
+
+<body class="stackedit">
+
+    <header>
+        <div class="container-center">
+            <img src="../../img/Foto-perfil.jpeg" alt="Minha foto" class="logo">
+            <div class="container-title">
+                <h1>Profª Vanessa Lago Machado - IFSul</h1>
+                <p>Espaço Acadêmico de Projetos, Disciplinas e Publicações</p>
+            </div>
+        </div>
+    </header>
+
+
+
+
+    <div class="container-disciplina">
+        <div class="stackedit__html">
+            <h1>Material de Aula</h1>
+            <h3 id="curso-bacharelado-em-ciência-da-computação"><b>Curso:</b> Bacharelado em Ciência da Computação</h3>
+            <h3 id="disciplina-tecnologia-orientada-a-objetos-too"><b>Disciplina:</b> Tecnologia Orientada a Objetos (TOO)</h3>
+
+        </div>
+
+        <hr>
+        <h1 id="orientação-a-objetos">Orientação a Objetos</h1>
+        <h2 id="aula-1---introdução">Aula 1 - Introdução</h2>
+        <p>A <strong>Programação Orientada a Objetos (POO)</strong> é um paradigma de programação que modela o software
+            com base em <strong>objetos do mundo real</strong>, unindo dados (atributos) e comportamentos (métodos)
+            dentro de estruturas chamadas <strong>classes</strong>.</p>
+        <blockquote>
+            <p>A linguagem <strong>Java</strong> foi projetada desde sua origem com suporte nativo à orientação a
+                objetos, sendo um dos exemplos mais utilizados para ensino e aplicação desse paradigma.</p>
+        </blockquote>
+        <p>Cada objeto é uma instância de uma <strong>classe</strong>, que define um tipo de dado abstrato. A OO promove
+            os princípios de <strong>encapsulamento</strong>, <strong>herança</strong>, <strong>polimorfismo</strong> e
+            <strong>abstração</strong> como seus pilares fundamentais.
+        </p>
+        <hr>
+        <h2 id="conceitos-fundamentais-da-orientação-a-objetos">Conceitos Fundamentais da Orientação a Objetos</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Conceito</th>
+                    <th>Descrição</th>
+                    <th>Exemplo em Java</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Classe</strong></td>
+                    <td>Molde que define a estrutura e comportamento de um objeto.</td>
+                    <td><code>class Pessoa { String nome; void falar() {} }</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Objeto</strong></td>
+                    <td>Instância de uma classe, contendo estado e comportamento.</td>
+                    <td><code>Pessoa p = new Pessoa();</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Encapsulamento</strong></td>
+                    <td>Oculta os detalhes internos e expõe apenas o necessário por meio de métodos públicos.</td>
+                    <td>definição de visibilidade dos atributos como <code>private</code> e acesso pelso métodos
+                        <code>get</code> e <code>set</code>.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <h2 id="definindo-o-modelo-de-um-objeto">Definindo o modelo de um objeto</h2>
+        <p>Por meio da criação de classes conseguimos definir o modelo de determinado objeto. Por exemplo, em um cenário
+            de uma academia podemos ter as pessoas, sendo aluno ou professor, a avaliação física e a prescrição do
+            treino. Nesse cenário podemos modelar a Pessoa (podendo ser Aluno ou Professor), AvaliacaoFisica, e a
+            PrescricaoTreino. Nesse momento não vamos considerar a especialização de pessoa como Aluno ou Professor,
+            considerando todos apenas como Pessoas, pois esse conteúdo de herança veremos mais a frente. Considerando
+            ainda que toda AvaliaçãoFísica é referente a uma Pessoa, e toda PrescricaoTreino é gerado após um uma
+            AvaliacaoFisica, estando vinculado a uma avaliação.</p>
+        <p>Primeiro, vamos considerar a declaração da classe Pessoa, considerando que a Pessoa possui informações de
+            nome, data de nascimento, e CPF.</p>
+        <h3 id="classe-pessoa-–-definindo-um-modelo-de-objeto">Classe Pessoa – Definindo um Modelo de Objeto</h3>
+        <pre
+            class=" language-mermaid"><svg id="mermaid-svg-MFATm5t59by9oCPW" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="119.640625" style="max-width: 178.15625px;" viewBox="-20 -20 178.15625 119.640625"><style>#mermaid-svg-MFATm5t59by9oCPW{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#000000;}#mermaid-svg-MFATm5t59by9oCPW .error-icon{fill:#552222;}#mermaid-svg-MFATm5t59by9oCPW .error-text{fill:#552222;stroke:#552222;}#mermaid-svg-MFATm5t59by9oCPW .edge-thickness-normal{stroke-width:2px;}#mermaid-svg-MFATm5t59by9oCPW .edge-thickness-thick{stroke-width:3.5px;}#mermaid-svg-MFATm5t59by9oCPW .edge-pattern-solid{stroke-dasharray:0;}#mermaid-svg-MFATm5t59by9oCPW .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-svg-MFATm5t59by9oCPW .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-svg-MFATm5t59by9oCPW .marker{fill:#666;stroke:#666;}#mermaid-svg-MFATm5t59by9oCPW .marker.cross{stroke:#666;}#mermaid-svg-MFATm5t59by9oCPW svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-svg-MFATm5t59by9oCPW g.classGroup text{fill:#999;fill:#111111;stroke:none;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:10px;}#mermaid-svg-MFATm5t59by9oCPW g.classGroup text .title{font-weight:bolder;}#mermaid-svg-MFATm5t59by9oCPW .classTitle{font-weight:bolder;}#mermaid-svg-MFATm5t59by9oCPW .node rect,#mermaid-svg-MFATm5t59by9oCPW .node circle,#mermaid-svg-MFATm5t59by9oCPW .node ellipse,#mermaid-svg-MFATm5t59by9oCPW .node polygon,#mermaid-svg-MFATm5t59by9oCPW .node path{fill:#eee;stroke:#999;stroke-width:1px;}#mermaid-svg-MFATm5t59by9oCPW .divider{stroke:#999;stroke:1;}#mermaid-svg-MFATm5t59by9oCPW g.clickable{cursor:pointer;}#mermaid-svg-MFATm5t59by9oCPW g.classGroup rect{fill:#eee;stroke:#999;}#mermaid-svg-MFATm5t59by9oCPW g.classGroup line{stroke:#999;stroke-width:1;}#mermaid-svg-MFATm5t59by9oCPW .classLabel .box{stroke:none;stroke-width:0;fill:#eee;opacity:0.5;}#mermaid-svg-MFATm5t59by9oCPW .classLabel .label{fill:#999;font-size:10px;}#mermaid-svg-MFATm5t59by9oCPW .relation{stroke:#666;stroke-width:1;fill:none;}#mermaid-svg-MFATm5t59by9oCPW .dashed-line{stroke-dasharray:3;}#mermaid-svg-MFATm5t59by9oCPW #compositionStart,#mermaid-svg-MFATm5t59by9oCPW .composition{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-MFATm5t59by9oCPW #compositionEnd,#mermaid-svg-MFATm5t59by9oCPW .composition{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-MFATm5t59by9oCPW #dependencyStart,#mermaid-svg-MFATm5t59by9oCPW .dependency{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-MFATm5t59by9oCPW #dependencyStart,#mermaid-svg-MFATm5t59by9oCPW .dependency{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-MFATm5t59by9oCPW #extensionStart,#mermaid-svg-MFATm5t59by9oCPW .extension{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-MFATm5t59by9oCPW #extensionEnd,#mermaid-svg-MFATm5t59by9oCPW .extension{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-MFATm5t59by9oCPW #aggregationStart,#mermaid-svg-MFATm5t59by9oCPW .aggregation{fill:#eee !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-MFATm5t59by9oCPW #aggregationEnd,#mermaid-svg-MFATm5t59by9oCPW .aggregation{fill:#eee !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-MFATm5t59by9oCPW .edgeTerminals{font-size:11px;}#mermaid-svg-MFATm5t59by9oCPW:root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#mermaid-svg-MFATm5t59by9oCPW class{fill:apa;}</style><g></g><defs><marker id="extensionStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 1,7 L18,13 V 1 Z"></path></marker></defs><defs><marker id="extensionEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 1,1 V 13 L18,7 Z"></path></marker></defs><defs><marker id="compositionStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="compositionEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="aggregationStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="aggregationEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="dependencyStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 5,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="dependencyEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"></path></marker></defs><g id="classid-Pessoa-436" class="classGroup" transform="translate(0,0 )"><rect x="0" y="0" width="138.15625" height="79.640625" class=" "></rect><text y="15" x="0"><tspan class="title" x="53.703125">Pessoa</tspan></text><line x1="0" y1="21.5" y2="21.5" x2="138.15625"></line><text x="5" y="31.5" fill="white" class="classText"><tspan x="5">-String nome</tspan><tspan x="5" dy="10">-LocalDate dataNascimento</tspan><tspan x="5" dy="10">-String CPF</tspan></text><line x1="0" y1="58.05078125" y2="58.05078125" x2="138.15625"></line><text x="5" y="73.05078125" fill="white" class="classText"><tspan x="5">+exibirDados()</tspan></text></g></svg></pre>
+        <p>A seguir, temos um exemplo de como criar a <strong>classe <code>Pessoa</code></strong>, que representa um
+            modelo genérico para qualquer pessoa dentro do sistema da academia.</p>
+        <pre class=" language-java"><code class="prism  language-java">
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>time<span class="token punctuation">.</span>LocalDate<span class="token punctuation">;</span>
+
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Pessoa</span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span> String nome<span class="token punctuation">;</span>
+<span class="token keyword">private</span> LocalDate dataNascimento<span class="token punctuation">;</span>
+<span class="token keyword">private</span> String CPF<span class="token punctuation">;</span>
+
+  
+<span class="token comment">// Construtor</span>
+<span class="token keyword">public</span> <span class="token function">Pessoa</span><span class="token punctuation">(</span>String n<span class="token punctuation">)</span><span class="token punctuation">{</span>
+	nome <span class="token operator">=</span> n<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token function">Pessoa</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token function">Pessoa</span><span class="token punctuation">(</span>String nome<span class="token punctuation">,</span> String CPF<span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>nome <span class="token operator">=</span> nome<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>CPF <span class="token operator">=</span> CPF<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Métodos de acesso (Getters e Setters)</span>
+
+<span class="token keyword">public</span> String <span class="token function">getNome</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> nome<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setNome</span><span class="token punctuation">(</span>String nome<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>nome <span class="token operator">=</span> nome<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> LocalDate <span class="token function">getDataNascimento</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> dataNascimento<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setDataNascimento</span><span class="token punctuation">(</span>LocalDate dataNascimento<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>dataNascimento <span class="token operator">=</span> dataNascimento<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> String <span class="token function">getCpf</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> cpf<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setCpf</span><span class="token punctuation">(</span>String cpf<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>cpf <span class="token operator">=</span> cpf<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// Método para exibir informações</span>
+
+<span class="token keyword">public</span> String <span class="token function">exibirDados</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        DateTimeFormatter formato <span class="token operator">=</span> DateTimeFormatter<span class="token punctuation">.</span><span class="token function">ofPattern</span><span class="token punctuation">(</span><span class="token string">"dd/MM/yyyy"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        String aux <span class="token operator">=</span> <span class="token string">"Dados da Pessoa cadastrada: \n"</span><span class="token punctuation">;</span>
+        aux <span class="token operator">+=</span> <span class="token string">"Nome: "</span><span class="token operator">+</span>nome<span class="token operator">+</span><span class="token string">"\n"</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>CPF<span class="token operator">!=</span>null<span class="token punctuation">)</span>
+            aux <span class="token operator">+=</span> <span class="token string">"CPF: "</span><span class="token operator">+</span>CPF<span class="token operator">+</span><span class="token string">"\n"</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>dataNascimento <span class="token operator">!=</span> null<span class="token punctuation">)</span>
+            aux <span class="token operator">+=</span> <span class="token string">"Data de Nascimento: "</span><span class="token operator">+</span>formato<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>dataNascimento<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> aux<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+        <hr>
+        <h3 id="entendendo-o-código-e-os-conceitos-">[ Entendendo o código e os conceitos ]</h3>
+        <hr>
+        <h1 id="encapsulamento">Encapsulamento</h1>
+        <p><strong>Encapsulamento</strong> é um dos pilares da programação orientada a objetos. Ele consiste em</p>
+        <ol>
+            <li><strong>Ocultar os atributos internos</strong> de uma classe, tornando-os inacessíveis diretamente de
+                fora da classe, ou seja, privando o acesso por meio da definição privada nos atributos, como em:
+                <code>private String nome;</code>
+            </li>
+            <li>Permitir o <strong>acesso controlado</strong> a esses atributos por meio de <strong>métodos
+                    públicos</strong> chamados de <strong>getters</strong> e <strong>setters</strong></li>
+        </ol>
+        <pre class=" language-java"><code class="prism  language-java"><span class="token keyword">public</span> String <span class="token function">getNome</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> nome<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setNome</span><span class="token punctuation">(</span>String nome<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>nome <span class="token operator">=</span> nome<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+        <p><strong>Explicação</strong></p>
+        <ul>
+            <li>private → impede o acesso direto aos atributos fora da classe.</li>
+            <li>getNome() → retorna o valor do atributo nome.</li>
+            <li>setNome(String nome) → permite alterar o valor de nome, de forma segura.</li>
+        </ul>
+        <p><strong>Como Criar Getters e Setters</strong></p>
+        <ul>
+            <li>O nome do método começa com get ou set.</li>
+            <li>A primeira letra do nome do atributo é <strong>colocada em maiúscula</strong> no nome do método.</li>
+            <li>O get retorna o tipo do atributo.</li>
+            <li>O set recebe o novo valor como parâmetro.</li>
+        </ul>
+        <p><strong>Exemplo Prático: Usando Get e Set</strong></p>
+        <pre class=" language-java"><code class="prism  language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestePessoa</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Pessoa p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Pessoa</span><span class="token punctuation">(</span><span class="token string">"Fulano da Silva"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Usando os métodos para acessar</span>
+        p<span class="token punctuation">.</span><span class="token function">setCpf</span><span class="token punctuation">(</span><span class="token string">"111.222.333-44"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Nome: "</span> <span class="token operator">+</span> p<span class="token punctuation">.</span><span class="token function">getNome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"CPF: "</span> <span class="token operator">+</span> p<span class="token punctuation">.</span><span class="token function">getCpf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+        <h3 id="benefícios-do-encapsulamento">Benefícios do Encapsulamento</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Benefício</th>
+                    <th>Explicação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Segurança</td>
+                    <td>Impede que valores inválidos sejam atribuídos diretamente aos atributos.</td>
+                </tr>
+                <tr>
+                    <td>Organização</td>
+                    <td>Torna o código mais modular, limpo e de fácil manutenção.</td>
+                </tr>
+                <tr>
+                    <td>Controle</td>
+                    <td>Permite aplicar regras de validação dentro dos métodos <code>set</code>.</td>
+                </tr>
+                <tr>
+                    <td>Flexibilidade</td>
+                    <td>Facilita futuras mudanças na estrutura da classe sem afetar outras partes do sistema.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Extra: Com validação no setCpf()</strong></p>
+        <pre class=" language-java"><code class="prism  language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setCpf</span><span class="token punctuation">(</span>String cpf<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	cpf <span class="token operator">=</span> cpf<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"."</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"-"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>cpf <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> cpf<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">11</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	    <span class="token keyword">this</span><span class="token punctuation">.</span>CPF <span class="token operator">=</span> cpf<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+	    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"CPF inválido."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+        <hr>
+        <h3 id="método-exibirdados">Método <code>exibirDados()</code></h3>
+        <p>Nesse código o método <code>exibirDados()</code> tem como objetivo <strong>retornar uma String formatada
+                contendo os dados da pessoa</strong>, organizados de forma legível, incluindo o nome, CPF (se
+            disponível) e a data de nascimento (se disponível), formatada no padrão brasileiro
+            (<code>dd/MM/yyyy</code>).</p>
+        <p>Esse método não recebe parâmetros, pois utiliza os <strong>atributos da própria instância</strong> da classe
+            (nome, CPF, dataNascimento).</p>
+    </div>
+
+
+    <footer>
+        <p>© 2025 Profª Vanessa Lago Machado - IFSul • Material de aula</p>
+    </footer>
+</body>
+
+</html>
