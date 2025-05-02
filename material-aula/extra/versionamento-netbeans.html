@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Versionamento de Projetos com Netbeans</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <link rel="stylesheet" href="../../css/estilo.css">
+</head>
+
+<body class="stackedit">
+  <header>
+    <div class="container-center">
+      <img src="../../img/Foto-perfil.jpeg" alt="Minha foto" class="logo">
+      <div class="container-title">
+        <h1>Profª Vanessa Lago Machado - IFSul</h1>
+        <p>Espaço Acadêmico de Projetos, Disciplinas e Publicações</p>
+      </div>
+    </div>
+  </header>
+
+
+
+
+  <div class="container-disciplina">
+    <div class="stackedit__html">
+      <h1>Material de Aula</h1>
+      <h3 id="curso-bacharelado-em-ciência-da-computação"><b>Curso:</b> Bacharelado em Ciência da Computação</h3>
+      <h3 id="disciplina-tecnologia-orientada-a-objetos-too"><b>Disciplina:</b> Tecnologia Orientada a Objetos (TOO)
+      </h3>
+
+    </div>
+
+<h1 id="orientação-a-objetos">Orientação a Objetos</h1>
+<h3 id="dica-extra-versionamento-com-git-e-github-via-netbeans">Dica Extra: Versionamento com Git e GitHub via NetBeans</h3>
+<blockquote>
+<p>Envio do projeto da <strong>atividade da academia</strong> para o repositório GitHub, utilizando o NetBeans.</p>
+</blockquote>
+<hr>
+<h2 id="etapa-1-–-compreendendo-o-problema">Etapa 1 – Compreendendo o problema</h2>
+<h3 id="🔎-o-que-é-versionamento">🔎 O que é versionamento?</h3>
+<p>Versionamento é o controle das versões de um projeto de software ao longo do tempo. Isso permite:</p>
+<ul>
+<li>Salvar o progresso com segurança</li>
+<li>Voltar para versões anteriores, se necessário</li>
+<li>Trabalhar em colaboração com outras pessoas</li>
+</ul>
+<p>O Git é um sistema de versionamento local e o GitHub é a plataforma que hospeda os repositórios online (nuvem).</p>
+<hr>
+<h3 id="💡-o-que-vamos-fazer">💡 O que vamos fazer?</h3>
+<p>Você vai:</p>
+<ul>
+<li>Criar um repositório no GitHub</li>
+<li>Enviar (fazer commit e push) o projeto da <strong>atividade da disciplina</strong></li>
+<li>Aprender a manter o projeto atualizado:
+<ul>
+<li>💻 Usando <strong>a mesma máquina</strong> (Situação 1)</li>
+<li>🏠🧑‍🏫 Alternando entre <strong>casa</strong> e <strong>computador da instituição</strong> (Situação 2)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="🛠️-etapa-2-–-implementação-guiada">🛠️ Etapa 2 – Implementação guiada</h2>
+<h3 id="passo-1-–-criar-o-repositório-no-github">Passo 1 – Criar o repositório no GitHub</h3>
+<ol>
+<li>Acesse <a href="https://github.com">https://github.com</a></li>
+<li>Clique em <strong>New Repository</strong></li>
+<li>Preencha:
+<ul>
+<li>Nome: <code>projeto-disciplina</code> (ou outro nome significativo)</li>
+<li>Descrição: <code>Projeto da disciplina XX – IFSul</code></li>
+<li>Deixe <strong>vazio</strong>, <strong>sem README ou .gitignore</strong></li>
+<li>Visibility: <strong>Public</strong> (pois para avaliação das atividades eu devo ter acesso ao seu projeto)</li>
+</ul>
+</li>
+<li>Clique em <strong>Create repository</strong></li>
+</ol>
+<hr>
+<h3 id="passo-2-–-vincular-o-projeto-no-netbeans">Passo 2 – Vincular o projeto no NetBeans</h3>
+<h3 id="inicializando-o-git-localmente">2.1 Inicializando o Git localmente</h3>
+<ol>
+<li>Abra o NetBeans</li>
+<li>Selecione o projeto que deseja enviar para o repositório no Github</li>
+<li>Com o botão direito sob o projeto clique em <strong>Versionamento &gt; Inicializar Repositório Git</strong></li>
+<li>Confirme a pasta do projeto e clique em <strong>OK</strong></li>
+</ol>
+<blockquote>
+<p>Isso cria um repositório Git local no seu projeto</p>
+</blockquote>
+<h3 id="realizando-o-primeiro-commit">2.2 Realizando o primeiro commit</h3>
+<ol>
+<li>Clique com o botão direito no projeto novamente</li>
+<li>Vá em <strong>Git &gt; Commit</strong></li>
+<li>Marque todos os arquivos listados (use o botão “Selecionar Tudo”)</li>
+<li>Escreva uma mensagem como:<br>
+“Versão inicial do projeto XXX”</li>
+<li>Clique em <strong>Commit</strong></li>
+</ol>
+<h3 id="vincular-repositório-remoto-no-netbeans">2.3. Vincular repositório remoto no NetBeans</h3>
+<ol>
+<li>No NetBeans, clique com o botão direito no projeto</li>
+<li>Vá em <strong>Git &gt; Remotes &gt; Push…</strong></li>
+<li>Seleciona a opção <strong>Especificar Localização do Repositório Git</strong></li>
+<li>Configure os campos da seguinte forma:</li>
+</ol>
+<ul>
+<li><strong>Nome do Remoto:</strong> mantenha origin</li>
+<li>Marque a opção <strong>Persistência Remota</strong> para guardar os dados (por exemplo, se desejar evitar digitar o token toda vez)</li>
+</ul>
+<ol start="5">
+<li>No campo <strong>URL</strong>, cole o link do seu repositório no GitHub (exemplo: <a href="https://github.com/seu-usuario/projeto-disciplina.git">https://github.com/seu-usuario/projeto-disciplina.git</a>)</li>
+<li>Insira suas credenciais do GitHub</li>
+</ol>
+<ul>
+<li><strong>Nome de usuário</strong></li>
+<li><strong>Token de acesso pessoal</strong> no lugar da senha</li>
+</ul>
+<blockquote>
+<p>O GitHub <strong>não aceita mais senha como login</strong> em operações de push/pull. Para isso, você precisa <strong>gerar um token</strong> de acesso e usá-lo como se fosse a senha. Se você não possui um token criado e guardado para utilização siga o próximo passo.</p>
+</blockquote>
+<ol start="7">
+<li>Clique em <strong>Avançar (Next)</strong> e depois <strong>Concluir (Finish)</strong></li>
+</ol>
+<h3 id="criação-de-token-no-github">2.4 Criação de Token no Github</h3>
+<blockquote>
+<p>Se você ainda <strong>não possui um token de acesso</strong>, siga os passos abaixo para criar um novo:</p>
+</blockquote>
+<ol>
+<li>Acesse seu perfil no GitHub:<br>
+🔗 <a href="https://github.com">https://github.com</a></li>
+<li>No canto superior direito, clique na sua foto e vá em<br>
+<strong>Settings &gt; Developer Settings</strong></li>
+<li>Clique em <strong>Personal access tokens &gt; Tokens (classic)</strong></li>
+<li>Clique no botão <strong>Generate new token (classic)</strong></li>
+</ol>
+<h4 id="configure-o-token"><strong>Configure o token:</strong></h4>
+<ul>
+<li><strong>Note</strong> (nome do token): exemplo Token para NetBeans</li>
+<li><strong>Expiration</strong> (data de validade): você pode customizar para que o token tenha validade, pelo menos, até o final do semestre.</li>
+<li><strong>Scopes (Permissões)</strong>: marque apenas:
+<ul>
+<li>repo (permite acesso e edição de repositórios)</li>
+</ul>
+</li>
+<li>Role até o fim da página e clique em <strong>Generate token</strong></li>
+</ul>
+<h4 id="importante"><strong>Importante:</strong></h4>
+<ul>
+<li>Copie o token <strong>assim que ele for gerado</strong></li>
+<li><strong>Guarde em local seguro</strong> — você <strong>não poderá visualizar novamente</strong></li>
+<li>Esse token será usado no campo “senha” do NetBeans em futuras operações com GitHub</li>
+</ul>
+<h3 id="enviar-os-arquivos-push">2.5 Enviar os arquivos (Push)</h3>
+<ol>
+<li>Após vincular o repositório remoto, vá em <strong>Git &gt; Remotes &gt; Push…</strong></li>
+<li>Confirme que o branch é main</li>
+<li>Clique em <strong>Next</strong>, depois em <strong>Finish</strong></li>
+</ol>
+<blockquote>
+<p>Pronto! Agora seu projeto foi enviado para o GitHub</p>
+</blockquote>
+<h3 id="como-saber-se-deu-certo"><strong>Como saber se deu certo?</strong></h3>
+<p>Acesse o repositório no GitHub (navegador) e verifique se os arquivos do projeto aparecem na interface.</p>
+<hr>
+<h3 id="🔁-como-trabalhar-com-git-em-diferentes-cenários">🔁 Como trabalhar com Git em diferentes cenários</h3>
+<h4 id="💻-cenário-1-–-usando-a-mesma-máquina-ex-notebook-pessoal">💻 Cenário 1 – Usando a mesma máquina (ex: notebook pessoal)</h4>
+<p>Sempre que fizer uma alteração deverá fazer a ação <code>Commit &amp; Push</code>:</p>
+<ol>
+<li>Realize a ação <code>commit</code> - ver item 2.2</li>
+<li>Após comitado os dados, faça a ação <code>push</code> - repita os passos descritos no item 2.5</li>
+</ol>
+<blockquote>
+<p>Isso <strong>envia a nova versão para o GitHub</strong> e mantém tudo sincronizado.</p>
+</blockquote>
+<hr>
+<h4 id="🏠🧑‍🏫-cenário-2-–-trabalhando-em-casa-e-no-laboratório-do-ifsul-com-máquinas-diferentes">🏠🧑‍🏫 Cenário 2 – Trabalhando em casa e no laboratório do IFSul com máquinas diferentes</h4>
+<p>Sempre que for mudar de máquina:</p>
+<h3 id="🏠-no-computador-de-casa">🏠 No computador de casa:</h3>
+<ol>
+<li><strong>Faça alterações normalmente</strong></li>
+<li>Realize a ação <code>Commit &amp; Push</code> ao finalizar:</li>
+</ol>
+<ul>
+<li>Realize a ação <code>commit</code> - ver item 2.2</li>
+<li>Após comitado os dados, faça a ação <code>push</code> - repita os passos descritos no item 2.5</li>
+</ul>
+<blockquote>
+<p>Isso <strong>envia a nova versão para o GitHub</strong> e mantém tudo sincronizado.após finalizar</p>
+</blockquote>
+<hr>
+<h3 id="🧑‍🏫-no-laboratório-do-ifsul-nova-máquina">🧑‍🏫 No laboratório do IFSul (nova máquina):</h3>
+<ol>
+<li>Abra o NetBeans</li>
+<li>Vá em <strong>Team &gt; Git &gt; Clone</strong></li>
+<li>Cole o link do seu repositório</li>
+<li>Faça o clone em uma pasta nova</li>
+<li>Trabalhe normalmente</li>
+<li>Ao final, realize a ação <code>Commit &amp; Push</code> para atualizar o repositório</li>
+</ol>
+<ul>
+<li>Realize a ação <code>commit</code> - ver item 2.2</li>
+<li>Após comitado os dados, faça a ação <code>push</code> - repita os passos descritos no item 2.5</li>
+</ul>
+<hr>
+<h3 id="⚠️-se-já-tiver-o-projeto-clonado-no-laboratório">⚠️ Se já tiver o projeto clonado no laboratório:</h3>
+<p>Antes de começar a trabalhar:</p>
+<ul>
+<li>Vá em <strong>Git &gt; Remote &gt; Fetch</strong></li>
+<li>Depois em <strong>Git &gt; Merge &gt; Remote Tracking</strong></li>
+<li>Assim, você <strong>baixa as alterações feitas em casa</strong></li>
+</ul>
+</div>
+
+<div id="nav-footer"><h4>Materiais TOO</h4>
+  <ul>
+    <li><a href="../too/introducao-oo.html">Aula 1 - Introdução a Orientação Objetos</a></li>
+    <li><a href="../too/relacionamento-composicao-oo.html">Aula 2 - Relacionamentos entre Objetos (Composição)</a></li>
+    <li><a href="../too/relacionamento-lista-oo.html">Aula 2 - Relacionamentos entre Objetos (Composição de Coleção 1:N)</a></li>
+  </ul>
+  <h4>Dicas Extras</h4>
+  <ul>
+    <li><a href="manipulacao-arraylist.html">Manipulação de Listas - Uso da classe ArrayList</a></li>
+    <li><a href="#">Versionamento de Projetos usando NetBeans</a></li>
+  </ul>
+</div>
+
+<footer>
+    <p>© 2025 Profª Vanessa Lago Machado - IFSul • Material de aula</p>
+</footer>
+
+</body>
+
+</html>

@@ -86,6 +86,7 @@ body {
     margin-top: 30px;
   }
 
+
  /*   Material de aula   */
   .container-disciplina {
     width: 60%;
@@ -100,7 +101,6 @@ body {
   .container-disciplina h3{
     line-height: 1.33;
     margin: 0;
-    font-weight: normal;
   }
   .stackedit__html {
     margin-bottom: 10px;
