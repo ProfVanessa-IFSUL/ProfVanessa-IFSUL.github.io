@@ -11,31 +11,16 @@
 </head>
 
 <body class="stackedit">
-  <header>
-    <div class="container-center">
-      <img src="../../img/Foto-perfil.jpeg" alt="Minha foto" class="logo">
-      <div class="container-title">
-        <h1>Profª Vanessa Lago Machado - IFSul</h1>
-        <p>Espaço Acadêmico de Projetos, Disciplinas e Publicações</p>
-      </div>
-    </div>
-  </header>
+  <div id="header-placeholder"></div>
 
 
 
 
   <div class="container-disciplina">
+    <div id="header-too-placeholder"></div>
 
-    <div class="stackedit__html">
-      <h1>Material de Aula</h1>
-      <h3 id="curso-bacharelado-em-ciência-da-computação"><b>Curso:</b> Bacharelado em Ciência da Computação</h3>
-      <h3 id="disciplina-tecnologia-orientada-a-objetos-too"><b>Disciplina:</b> Tecnologia Orientada a Objetos (TOO)
-      </h3>
 
-    </div>
-
-    <hr>
-    <h1 id="orientação-a-objetos">Orientação a Objetos</h1>
+    
     <h2 id="aula-2---relacionamento-entre-objetos-composição">Aula 2 - Relacionamento entre Objetos (Composição)</h2>
     <p>Na programação orientada a objetos, <strong>relacionar classes</strong> é uma forma natural de <strong>modelar o
         mundo real</strong>, onde objetos frequentemente dependem ou contêm outros objetos.</p>
@@ -163,24 +148,40 @@ AvaliacaoFisica a1 <span class="token operator">=</span> <span class="token keyw
 
 
   </div>
-  <div id="nav-footer"><h4>Materiais TOO</h4>
-    <ul>
-      <li><a href="introducao-oo.html">Aula 1 - Introdução a Orientação Objetos</a></li>
-      <li><a href="#">Aula 2 - Relacionamentos entre Objetos (Composição)</a></li>
-      <li><a href="relacionamento-lista-oo.html">Aula 2 - Relacionamentos entre Objetos (Composição de Coleção 1:N)</a></li>
-    </ul>
-    <h4>Dicas Extras</h4>
-    <ul>
-      <li><a href="../extra/manipulacao-arraylist.html">Manipulação de Listas - Uso da classe ArrayList</a></li>
-      <li><a href="../extra/versionamento-netbeans.html">Versionamento de Projetos usando NetBeans</a></li>
-    </ul>
-  </div>
+
+  <div id="footer-too-placeholder"></div>
+
+  <div id="footer-placeholder"></div>
 
 
+  <script>
 
-  <footer>
-    <p>© 2025 Profª Vanessa Lago Machado - IFSul • Material de aula</p>
-  </footer>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+      // Carregar header
+      fetch("../../includes/header.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("header-placeholder").innerHTML = data);
+
+      // Carregar footer
+      fetch("../../includes/footer.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+
+      // Carregar footer - TOO
+      fetch("includes/footer-too.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("footer-too-placeholder").innerHTML = data);
+
+      // Carregar header - TOO
+      fetch("includes/header-too.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("header-too-placeholder").innerHTML = data);
+    });
+  </script>
+
+
 </body>
 
 </html>

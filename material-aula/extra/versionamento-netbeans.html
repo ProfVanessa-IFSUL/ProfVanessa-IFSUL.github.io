@@ -10,15 +10,7 @@
 </head>
 
 <body class="stackedit">
-  <header>
-    <div class="container-center">
-      <img src="../../img/Foto-perfil.jpeg" alt="Minha foto" class="logo">
-      <div class="container-title">
-        <h1>Profª Vanessa Lago Machado - IFSul</h1>
-        <p>Espaço Acadêmico de Projetos, Disciplinas e Publicações</p>
-      </div>
-    </div>
-  </header>
+  <div id="header-placeholder"></div>
 
 
 
@@ -27,7 +19,6 @@
     <div class="stackedit__html">
       <h1>Material de Aula</h1>
       <h3 id="curso-bacharelado-em-ciência-da-computação"><b>Curso:</b> Bacharelado em Ciência da Computação</h3>
-      <h3 id="disciplina-tecnologia-orientada-a-objetos-too"><b>Disciplina:</b> Tecnologia Orientada a Objetos (TOO)
       </h3>
 
     </div>
@@ -210,24 +201,33 @@
 <li>Depois em <strong>Git &gt; Merge &gt; Remote Tracking</strong></li>
 <li>Assim, você <strong>baixa as alterações feitas em casa</strong></li>
 </ul>
+
+<button onclick="history.back()" class="botao-voltar">← Voltar à página anterior</button>
 </div>
 
-<div id="nav-footer"><h4>Materiais TOO</h4>
-  <ul>
-    <li><a href="../too/introducao-oo.html">Aula 1 - Introdução a Orientação Objetos</a></li>
-    <li><a href="../too/relacionamento-composicao-oo.html">Aula 2 - Relacionamentos entre Objetos (Composição)</a></li>
-    <li><a href="../too/relacionamento-lista-oo.html">Aula 2 - Relacionamentos entre Objetos (Composição de Coleção 1:N)</a></li>
-  </ul>
-  <h4>Dicas Extras</h4>
-  <ul>
-    <li><a href="manipulacao-arraylist.html">Manipulação de Listas - Uso da classe ArrayList</a></li>
-    <li><a href="#">Versionamento de Projetos usando NetBeans</a></li>
-  </ul>
-</div>
 
-<footer>
-    <p>© 2025 Profª Vanessa Lago Machado - IFSul • Material de aula</p>
-</footer>
+
+<div id="footer-placeholder"></div>
+
+
+<script>
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    // Carregar header
+    fetch("../../includes/header.html")
+      .then(response => response.text())
+      .then(data => document.getElementById("header-placeholder").innerHTML = data);
+
+    // Carregar footer
+    fetch("../../includes/footer.html")
+      .then(response => response.text())
+      .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+
+    
+  });
+</script>
 
 </body>
 
