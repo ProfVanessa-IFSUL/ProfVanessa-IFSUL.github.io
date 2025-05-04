@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOO - Introdução OO</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <link rel="stylesheet" href="../../css/estilo.css">
+</head>
+
+
+
+<body class="stackedit">
+  <div id="header-placeholder"></div>
+
+
+
+
+  <div class="container-disciplina">
+    <div id="header-lpoo-placeholder"></div>
+    <h2 id="objetivo-desse-tutorial">Objetivo desse Tutorial (Parte 3)</h2>
+<p>Nesta terceira parte do projeto <strong>LPOO Card Games</strong>, vamos configurar a <strong>persistência de dados</strong>. Os principais tópicos que serão trabalhados:</p>
+<ul>
+<li>Anotação das classes com JPA para gerar as tabelas no banco;</li>
+</ul>
+<hr>
+<h2 id="etapas-parte-3">Etapas parte 3</h2>
+<h3 id="passo-8-anotação-jpa-na-classe-carta">Passo 8: Anotação JPA na Classe <code>Carta</code></h3>
+<p>Agora vamos configurar a classe Carta para que seja persistida no banco de dados com as anotações do <strong>JPA (Java Persistence API)</strong>.</p>
+<hr>
+<h4 id="📦-local"><strong>📦 Local:</strong></h4>
+<p>No pacote <code>model</code>, edite a classe <code>Carta.java</code> com as anotações conforme instruções abaixo.</p>
+<hr>
+<h4 id="🎯-requisitos-para-a-entidade"><strong>🎯 Requisitos para a entidade:</strong></h4>
+<ul>
+<li>Nome da tabela no banco: <strong>tbl_carta</strong></li>
+<li>Atributo id como chave primária com <strong>geração automática</strong> (GenerationType.IDENTITY), nome no banco: car_id</li>
+</ul>
+<blockquote>
+<p>Considere: “nome atributo na classe → nome do atributo mapeado no BD”</p>
+</blockquote>
+<ul>
+<li>
+<p>Atributos obrigatórios:</p>
+<ul>
+<li>nome → car_nome</li>
+<li>ataque → car_ataque</li>
+<li>defesa → car_defesa</li>
+</ul>
+</li>
+<li>
+<p>Atributos opcionais:</p>
+<ul>
+<li>categoria (Enum Categoria) → car_categoria</li>
+<li>raridade (int) → car_raridade</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Para o atributo categoria, mapear como texto (não índice):<br>
+@Enumerated(EnumType.STRING)</p>
+</blockquote>
+<p><strong>Enum Categoria:</strong></p>
+<blockquote>
+<p>⚠️ O enum não precisa de anotações JPA. Ele será interpretado corretamente com @Enumerated(EnumType.STRING) na classe Carta.</p>
+</blockquote>
+<div id="tutorial-navigation">
+  <button onclick="history.back()">← Voltar</button>
+  <button onclick="window.location.href='lpoo-projectCardGame-p4.html'">Próxima Parte →</button>
+</div>
+</div>
+
+<div id="footer-lpoo-placeholder"></div>
+
+    <div id="footer-placeholder"></div>
+  
+  
+    <script>
+  
+  
+      document.addEventListener("DOMContentLoaded", function () {
+  
+        // Carregar header
+        fetch("../../includes/header.html")
+          .then(response => response.text())
+          .then(data => document.getElementById("header-placeholder").innerHTML = data);
+  
+        // Carregar footer
+        fetch("../../includes/footer.html")
+          .then(response => response.text())
+          .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+  
+        // Carregar footer - LPOO
+        fetch("includes/footer-lpoo.html")
+          .then(response => response.text())
+          .then(data => document.getElementById("footer-lpoo-placeholder").innerHTML = data);
+  
+        // Carregar header - LPOO
+        fetch("includes/header-lpoo.html")
+          .then(response => response.text())
+          .then(data => document.getElementById("header-lpoo-placeholder").innerHTML = data);
+      });
+    </script>
+</body>
+
+</html>

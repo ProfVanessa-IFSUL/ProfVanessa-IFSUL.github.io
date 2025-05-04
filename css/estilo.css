@@ -176,3 +176,24 @@ body {
   .botao-voltar:hover {
     background-color: #c290e0;
   }
+
+  #tutorial-navigation{
+    display: flex; 
+    justify-content: space-between; 
+    padding: 20px 0;
+  }
+  #tutorial-navigation button{
+    background-color: #6a1b9a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+  }
+  
+  #tutorial-navigation button:hover {
+    background-color: #c290e0;
+  }

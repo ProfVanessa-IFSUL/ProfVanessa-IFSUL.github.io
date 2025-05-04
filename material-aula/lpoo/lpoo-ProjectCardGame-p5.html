@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOO - Introdução OO</title>
+    <link rel="stylesheet" href="https://stackedit.io/style.css" />
+    <link rel="stylesheet" href="../../css/estilo.css">
+  </head>
+  
+  
+  
+  <body class="stackedit">
+    <div id="header-placeholder"></div>
+  
+  
+  
+  
+    <div class="container-disciplina">
+      <div id="header-lpoo-placeholder"></div>
+      <h2 id="objetivo-desse-tutorial">Objetivo desse Tutorial (Parte Final)</h2>
+<h2 id="objetivo-desse-tutorial">Objetivo desse Tutorial</h2>
+<p>Nesta quinta e última parte do Tutorial 1 do projeto <strong>LPOO Card Games</strong>, vamos testar a <strong>persistência de dados</strong>. Os principais tópicos que serão trabalhados:</p>
+<ul>
+<li>realizar testes unitários utilizando <strong>JUnit</strong>, verificando:<br>
+–   Teste de <strong>conexão com o banco de dados</strong>;<br>
+–   Teste de <strong>persistência da entidade Carta</strong> no banco.</li>
+</ul>
+<hr>
+<h2 id="etapas-parte-5">Etapas parte 5</h2>
+<h3 id="passo-10---criação-de-um-teste-de-conexão">Passo 10 - Criação de um Teste de Conexão:</h3>
+<h4 id="objetivo">Objetivo</h4>
+<p>Confirmar se:</p>
+<ul>
+<li>A conexão com o banco via JPA está funcionando.</li>
+<li>O EntityManager está aberto.</li>
+<li>Nenhuma exceção ocorre ao criar ou fechar a conexão.</li>
+</ul>
+<h3 id="passo-10.1---como-criar-uma-classe-de-teste-junit-no-netbeans-testeconexao">Passo 10.1 - Como criar uma classe de teste JUnit no NetBeans (TesteConexao)</h3>
+<p>Para testar a conexão com o banco de dados utilizando JPA, siga os passos abaixo para criar corretamente uma classe de teste no NetBeans:</p>
+<ol>
+<li>
+<p><strong>No NetBeans</strong>, localize o pacote <code>Test Packages</code> no seu projeto.</p>
+</li>
+<li>
+<p>Clique com o <strong>botão direito</strong> sobre ele e selecione:</p>
+<p>➤ New &gt; JUnit Test…</p>
+</li>
+<li>
+<p>Na janela que será aberta:</p>
+<ul>
+<li>Em <strong>“Class Name”</strong>, digite: TesteConexao</li>
+<li>No campo de pacote, mantenha o mesmo da sua classe de persistência, ou selecione um apropriado para os testes.</li>
+</ul>
+</li>
+<li>
+<p>Em <strong>“Generated Code”</strong>, marque:</p>
+<ul>
+<li><em>Testes de Inicialização</em> (@Before)</li>
+<li><em>Testes de Finalização</em> (@After)</li>
+</ul>
+</li>
+<li>
+<p>Clique em <strong>“Finish”</strong>.</p>
+</li>
+</ol>
+<hr>
+<p>O <strong>JUnit 4</strong> utiliza <strong>anotações especiais</strong> para definir o comportamento de métodos antes, durante e depois da execução do teste. No seu arquivo de teste, essas anotações serão geradas automaticamente:</p>
+<ul>
+<li><code>@Before</code>: Executa <strong>antes de cada teste</strong>. Ideal para abrir conexões ou inicializar objetos.</li>
+<li><code>@After</code>: Executa <strong>após cada teste</strong>. Usado para liberar recursos como conexões.</li>
+<li><code>@Test</code>: Define o <strong>método de teste em si</strong>, onde ficam as verificações e o que desejamos testar.</li>
+</ul>
+<p><strong>Resumo do fluxo de execução</strong>:</p>
+<pre class=" language-java"><code class="prism  language-java"><span class="token annotation punctuation">@Before</span> ➝ <span class="token annotation punctuation">@Test</span> ➝ <span class="token annotation punctuation">@After</span>
+</code></pre>
+<p>Ou seja, antes de cada método anotado com @Test, o JUnit executa primeiro o método anotado com @Before (se houver). Depois que o teste termina, o JUnit executa o método com @After (se houver).</p>
+<hr>
+<h3 id="passo-10.2---configurando-o-arquivo-testeconexao">Passo 10.2 - Configurando o arquivo <code>TesteConexao</code></h3>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">private</span> PersistenciaJPA jpa<span class="token punctuation">;</span>
+<span class="token annotation punctuation">@Before</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setUp</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	jpa <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PersistenciaJPA</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Iniciando teste de conexão..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@After</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">tearDown</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>jpa <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> jpa<span class="token punctuation">.</span><span class="token function">conexaoAberta</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		jpa<span class="token punctuation">.</span><span class="token function">fecharConexao</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Conexão fechada com sucesso."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testeConexaoAberta</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token function">assertNotNull</span><span class="token punctuation">(</span><span class="token string">"Instância JPA não pode ser nula"</span><span class="token punctuation">,</span> jpa<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">assertTrue</span><span class="token punctuation">(</span><span class="token string">"A conexão deveria estar aberta"</span><span class="token punctuation">,</span> jpa<span class="token punctuation">.</span><span class="token function">conexaoAberta</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Conexão aberta com sucesso!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Obs:<br>
+método <code>assertTrue(...)</code> valida a condição, nesse caso se a conexão estiver aberta, caso contrário, o teste falha e a mensagem “A conexão deveria estar aberta” é mostrada.</p>
+<p>Se o teste passou e a mensagem “Conexão aberta com sucesso!” apareceu confira no BD e a tabela “tbl_carta” deve ter sido criada. Agora vamos ao próximo teste.</p>
+<hr>
+<h3 id="passo-10.3---teste-de-persistência-de-carta-no-banco-de-dadostesteconexao">Passo 10.3 - Teste de Persistência de Carta no Banco de Dados<code>TesteConexao</code></h3>
+<ol>
+<li>Crie outro arquivo de teste (Seguir o passo 10.1) com o nome “TestePersistenciaCarta”</li>
+<li>Siga os passos descritos no passo 10.2 para abrir a conexão em um método anotado com @Before e fechar a conexão em um método anotado com @After. O método anotado com @Test deve:</li>
+</ol>
+<ul>
+<li>Instanciar um objeto do tipo Carta, passando as informações da carta. Ex: Carta c = new Carta(); …</li>
+<li>Chame o método <code>jpa.persist(c)</code>. Exemplo:</li>
+</ul>
+<pre class=" language-java"><code class="prism  language-java"><span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">cadastroCartas</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            Carta c <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Carta</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            c<span class="token punctuation">.</span><span class="token function">setNome</span><span class="token punctuation">(</span><span class="token string">"Escudo Ferro"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            c<span class="token punctuation">.</span><span class="token function">setAtaque</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            c<span class="token punctuation">.</span><span class="token function">setDefesa</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            c<span class="token punctuation">.</span><span class="token function">setCategoria</span><span class="token punctuation">(</span>Categoria<span class="token punctuation">.</span>ARMADURA<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            jpa<span class="token punctuation">.</span><span class="token function">persist</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>err<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Erro ao persistir Carta: "</span><span class="token operator">+</span>ex<span class="token punctuation">)</span><span class="token punctuation">;</span>   
+        <span class="token punctuation">}</span>
+        ArrayList<span class="token operator">&lt;</span>Carta<span class="token operator">&gt;</span> listaCartas <span class="token operator">=</span> <span class="token punctuation">(</span>ArrayList<span class="token punctuation">)</span>jpa<span class="token punctuation">.</span><span class="token function">getCartas</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>listaCartas<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Não há cartas cadastradas"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>Carta c<span class="token operator">:</span> listaCartas<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span><span class="token function">getNome</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span><span class="token string">"- ataque: "</span><span class="token operator">+</span>c<span class="token punctuation">.</span><span class="token function">getAtaque</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">" - defesa: "</span><span class="token operator">+</span>c<span class="token punctuation">.</span><span class="token function">getDefesa</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<ol start="3">
+<li>Execute o teste e verifique no BD se as informações foram passadas para o BD.</li>
+</ol>
+<div id="tutorial-navigation">
+    <button onclick="history.back()">← Voltar</button>
+  </div>
+  </div>
+  
+  <div id="footer-lpoo-placeholder"></div>
+  
+      <div id="footer-placeholder"></div>
+    
+    
+      <script>
+    
+    
+        document.addEventListener("DOMContentLoaded", function () {
+    
+          // Carregar header
+          fetch("../../includes/header.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("header-placeholder").innerHTML = data);
+    
+          // Carregar footer
+          fetch("../../includes/footer.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+    
+          // Carregar footer - LPOO
+          fetch("includes/footer-lpoo.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("footer-lpoo-placeholder").innerHTML = data);
+    
+          // Carregar header - LPOO
+          fetch("includes/header-lpoo.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("header-lpoo-placeholder").innerHTML = data);
+        });
+      </script>
+</body>
+
+</html>

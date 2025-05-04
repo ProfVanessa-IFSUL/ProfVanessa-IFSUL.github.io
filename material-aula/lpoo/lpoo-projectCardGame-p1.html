@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOO - Introdução OO</title>
+    <link rel="stylesheet" href="https://stackedit.io/style.css" />
+    <link rel="stylesheet" href="../../css/estilo.css">
+</head>
+
+
+
+<body class="stackedit">
+    <div id="header-placeholder"></div>
+
+
+
+
+    <div class="container-disciplina">
+        <div id="header-lpoo-placeholder"></div>
+        <h2 id="objetivo-desse-tutorial">Objetivo desse Tutorial (Parte 1)</h2>
+        <p>Nesta primeira aula do projeto <strong>LPOO Card Games</strong>, realizaremos alguns passos. Nessa primeira
+            parte realizaremos as configurações iniciais do projeto:</p>
+        <ul>
+            <li>Criação do projeto no NetBeans utilizando Maven;</li>
+            <li>Organização da estrutura do projeto em pacotes (MVC);</li>
+            <li>Elaboração das classes <code>Jogador</code>, <code>Baralho</code> e <code>Carta</code>;</li>
+            <li>Criação do banco de dados;</li>
+            <li>Inclusão das dependências no <code>pom.xml</code>;</li>
+        </ul>
+        <hr>
+        <h2 id="etapas-parte-1">Etapas parte 1</h2>
+        <h3 id="passo-1-criação-do-projeto-no-netbeans">Passo 1: Criação do Projeto no NetBeans</h3>
+        <ol>
+            <li>Abra o <strong>NetBeans</strong>.</li>
+            <li>Vá em <code>File &gt; New Project</code>.</li>
+            <li>Selecione <strong>Java with Maven &gt; Java Application</strong>.</li>
+            <li>Configure:
+                <ul>
+                    <li><strong>Project Name</strong>: <code>LPOO-CardGame</code></li>
+                    <li><strong>Group Id</strong>: <code>br.edu.seuprojeto</code></li>
+                    <li><strong>Artifact Id</strong>: <code>lpoo-cardgame</code></li>
+                </ul>
+            </li>
+            <li>Finalize clicando em <strong>Finish</strong>.</li>
+        </ol>
+        <hr>
+        <h3 id="passo-2-organização-dos-pacotes">Passo 2: Organização dos Pacotes</h3>
+        <p>Crie os seguintes pacotes:</p>
+        <pre><code>model/
+view/
+control/
+</code></pre>
+        <hr>
+        <h3 id="passo-3-elaboração-das-classes">Passo 3: Elaboração das Classes</h3>
+        <p>Crie as classes no pacote <code>model</code>, conforme diagrama abaixo:</p>
+        <pre
+            class=" language-mermaid"><svg id="mermaid-svg-h8JSqVcmdr5N77x1" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="377.65234375" style="max-width: 187.4453125px;" viewBox="-20 -20 187.4453125 377.65234375"><style>#mermaid-svg-h8JSqVcmdr5N77x1{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#000000;}#mermaid-svg-h8JSqVcmdr5N77x1 .error-icon{fill:#552222;}#mermaid-svg-h8JSqVcmdr5N77x1 .error-text{fill:#552222;stroke:#552222;}#mermaid-svg-h8JSqVcmdr5N77x1 .edge-thickness-normal{stroke-width:2px;}#mermaid-svg-h8JSqVcmdr5N77x1 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-svg-h8JSqVcmdr5N77x1 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-svg-h8JSqVcmdr5N77x1 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-svg-h8JSqVcmdr5N77x1 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-svg-h8JSqVcmdr5N77x1 .marker{fill:#666;stroke:#666;}#mermaid-svg-h8JSqVcmdr5N77x1 .marker.cross{stroke:#666;}#mermaid-svg-h8JSqVcmdr5N77x1 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-svg-h8JSqVcmdr5N77x1 g.classGroup text{fill:#999;fill:#111111;stroke:none;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:10px;}#mermaid-svg-h8JSqVcmdr5N77x1 g.classGroup text .title{font-weight:bolder;}#mermaid-svg-h8JSqVcmdr5N77x1 .classTitle{font-weight:bolder;}#mermaid-svg-h8JSqVcmdr5N77x1 .node rect,#mermaid-svg-h8JSqVcmdr5N77x1 .node circle,#mermaid-svg-h8JSqVcmdr5N77x1 .node ellipse,#mermaid-svg-h8JSqVcmdr5N77x1 .node polygon,#mermaid-svg-h8JSqVcmdr5N77x1 .node path{fill:#eee;stroke:#999;stroke-width:1px;}#mermaid-svg-h8JSqVcmdr5N77x1 .divider{stroke:#999;stroke:1;}#mermaid-svg-h8JSqVcmdr5N77x1 g.clickable{cursor:pointer;}#mermaid-svg-h8JSqVcmdr5N77x1 g.classGroup rect{fill:#eee;stroke:#999;}#mermaid-svg-h8JSqVcmdr5N77x1 g.classGroup line{stroke:#999;stroke-width:1;}#mermaid-svg-h8JSqVcmdr5N77x1 .classLabel .box{stroke:none;stroke-width:0;fill:#eee;opacity:0.5;}#mermaid-svg-h8JSqVcmdr5N77x1 .classLabel .label{fill:#999;font-size:10px;}#mermaid-svg-h8JSqVcmdr5N77x1 .relation{stroke:#666;stroke-width:1;fill:none;}#mermaid-svg-h8JSqVcmdr5N77x1 .dashed-line{stroke-dasharray:3;}#mermaid-svg-h8JSqVcmdr5N77x1 #compositionStart,#mermaid-svg-h8JSqVcmdr5N77x1 .composition{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-h8JSqVcmdr5N77x1 #compositionEnd,#mermaid-svg-h8JSqVcmdr5N77x1 .composition{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-h8JSqVcmdr5N77x1 #dependencyStart,#mermaid-svg-h8JSqVcmdr5N77x1 .dependency{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-h8JSqVcmdr5N77x1 #dependencyStart,#mermaid-svg-h8JSqVcmdr5N77x1 .dependency{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-h8JSqVcmdr5N77x1 #extensionStart,#mermaid-svg-h8JSqVcmdr5N77x1 .extension{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-h8JSqVcmdr5N77x1 #extensionEnd,#mermaid-svg-h8JSqVcmdr5N77x1 .extension{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-h8JSqVcmdr5N77x1 #aggregationStart,#mermaid-svg-h8JSqVcmdr5N77x1 .aggregation{fill:#eee !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-h8JSqVcmdr5N77x1 #aggregationEnd,#mermaid-svg-h8JSqVcmdr5N77x1 .aggregation{fill:#eee !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-h8JSqVcmdr5N77x1 .edgeTerminals{font-size:11px;}#mermaid-svg-h8JSqVcmdr5N77x1:root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#mermaid-svg-h8JSqVcmdr5N77x1 class{fill:apa;}</style><g></g><defs><marker id="extensionStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 1,7 L18,13 V 1 Z"></path></marker></defs><defs><marker id="extensionEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 1,1 V 13 L18,7 Z"></path></marker></defs><defs><marker id="compositionStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="compositionEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="aggregationStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="aggregationEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="dependencyStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 5,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="dependencyEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"></path></marker></defs><g id="classid-Jogador-33" class="classGroup" transform="translate(0,0 )"><rect x="0" y="0" width="147.4453125" height="72.6015625" class=" "></rect><text y="15" x="0"><tspan class="title" x="55.1875">Jogador</tspan></text><line x1="0" y1="21.55078125" y2="21.55078125" x2="147.4453125"></line><text x="5" y="31.55078125" fill="white" class="classText"><tspan x="5">-int id</tspan><tspan x="5" dy="10">-String nickname</tspan><tspan x="5" dy="10">-int level</tspan><tspan x="5" dy="10">Jogador : List&lt;Carta&gt; baralho</tspan></text><line x1="0" y1="68.1015625" y2="68.1015625" x2="147.4453125"></line><text x="5" y="83.1015625" fill="white" class="classText"></text></g><g id="classid-Carta-34" class="classGroup" transform="translate(20.36328125,122.6015625 )"><rect x="0" y="0" width="106.71875" height="92.5" class=" "></rect><text y="15" x="0"><tspan class="title" x="40.8515625">Carta</tspan></text><line x1="0" y1="21.5" y2="21.5" x2="106.71875"></line><text x="5" y="31.5" fill="white" class="classText"><tspan x="5">-int id</tspan><tspan x="5" dy="10">-String nome</tspan><tspan x="5" dy="10">-int ataque</tspan><tspan x="5" dy="10">-int defesa</tspan><tspan x="5" dy="10">-Categoria categoria</tspan><tspan x="5" dy="10">-int raridade</tspan></text><line x1="0" y1="88" y2="88" x2="106.71875"></line><text x="5" y="103" fill="white" class="classText"></text></g><g id="classid-Categoria-35" class="classGroup" transform="translate(12.8046875,265.1015625 )"><rect x="0" y="0" width="121.8359375" height="72.55078125" class=" "></rect><text y="15" x="0"><tspan x="27.2109375">«enumeration»</tspan><tspan class="title" dy="10" x="38.70703125">Categoria</tspan></text><line x1="0" y1="31.55078125" y2="31.55078125" x2="121.8359375"></line><text x="5" y="41.55078125" fill="white" class="classText"><tspan x="5">MONSTRO</tspan><tspan x="5" dy="10">MAGIA</tspan><tspan x="5" dy="10">ARMADURA</tspan></text><line x1="0" y1="68.05078125" y2="68.05078125" x2="121.8359375"></line><text x="5" y="83.05078125" fill="white" class="classText"></text></g><path d="M73.72265625,72.6015625L73.72265625,76.76822916666667C73.72265625,80.93489583333333,73.72265625,89.26822916666667,73.72265625,97.6015625C73.72265625,105.93489583333333,73.72265625,114.26822916666667,73.72265625,118.43489583333333L73.72265625,122.6015625" id="edge22" class="relation" marker-start="url(#compositionStart)" marker-end="url(#dependencyEnd)"></path><path d="M73.72265625,215.1015625L73.72265625,219.26822916666666C73.72265625,223.43489583333334,73.72265625,231.76822916666666,73.72265625,240.1015625C73.72265625,248.43489583333334,73.72265625,256.7682291666667,73.72265625,260.9348958333333L73.72265625,265.1015625" id="edge23" class="relation" marker-end="url(#dependencyEnd)"></path></svg></pre>
+        <hr>
+        <h3 id="passo-4-criação-do-banco-de-dados">Passo 4: Criação do Banco de Dados</h3>
+        <p>No PostgreSQL crie a base de dados com o nome <code>db_lpoo_card_game</code></p>
+        <hr>
+        <h3 id="passo-5-configuração-do-arquivo-pom.xml">Passo 5: Configuração do arquivo <code>pom.xml</code></h3>
+        <p>Localize o arquivo <code>pom.xml</code> na pasta <code>Project Files</code>. Nesse arquivo vamos adicionar as
+            dependências do JPA, Hibernate e JDBC. Abaixo da tag <code>&lt;properties&gt;</code> inclua a tag
+            <code>&lt;dependencies&gt;</code> :</p>
+        <pre class=" language-xml"><code class="prism  language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- Hibernate 5 como provedor JPA --&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.hibernate<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>hibernate-core<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>5.6.15.Final<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- JUnit para testes --&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">&gt;</span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>4.13.2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- Driver PostgreSQL --&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.postgresql<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>postgresql<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>42.2.24<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+        
+        <span class="token comment">&lt;!-- JPA API (javax.persistence) --&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>javax.persistence<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>javax.persistence-api<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>2.2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- JAXB (necessário para Java 11+ e compatível com Java 21) --&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>javax.xml.bind<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>jaxb-api<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>2.3.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+        
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+        <hr>
+        <p>Na parte 2 dessa aula realizaremos configurações relacionadaas a persistência dos dados:</p>
+        <ul>
+            <li>Configuração de acesso ao banco de dados (<code>persistence.xml</code>);</li>
+            <li>Anotação das entidades com <strong>JPA</strong> para persistência;</li>
+            <li>Criação das telas iniciais da interface gráfica do sistema.</li>
+        </ul>
+    
+
+        <div id="tutorial-navigation">
+            <button onclick="history.back()">← Voltar</button>
+            <button onclick="window.location.href='lpoo-projectCardGame-p2.html'">Próxima Parte →</button>
+        </div>    
+    </div>
+
+    <div id="footer-lpoo-placeholder"></div>
+
+    <div id="footer-placeholder"></div>
+
+
+    <script>
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // Carregar header
+            fetch("../../includes/header.html")
+                .then(response => response.text())
+                .then(data => document.getElementById("header-placeholder").innerHTML = data);
+
+            // Carregar footer
+            fetch("../../includes/footer.html")
+                .then(response => response.text())
+                .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+
+            // Carregar footer - LPOO
+            fetch("includes/footer-lpoo.html")
+                .then(response => response.text())
+                .then(data => document.getElementById("footer-lpoo-placeholder").innerHTML = data);
+
+            // Carregar header - LPOO
+            fetch("includes/header-lpoo.html")
+                .then(response => response.text())
+                .then(data => document.getElementById("header-lpoo-placeholder").innerHTML = data);
+        });
+    </script>
+
+
+</body>
+
+</html>

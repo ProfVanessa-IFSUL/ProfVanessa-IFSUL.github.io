@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOO - Introdução OO</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <link rel="stylesheet" href="../../css/estilo.css">
+</head>
+
+
+
+<body class="stackedit">
+  <div id="header-placeholder"></div>
+
+
+
+
+  <div class="container-disciplina">
+    <div id="header-lpoo-placeholder"></div>
+    <h2 id="objetivo-desse-tutorial">Objetivo desse Tutorial (Parte 2)</h2>
+<p>Nesta segunda parte do projeto <strong>LPOO Card Games</strong>, vamos configurar a <strong>persistência de dados</strong>, por meio da:</p>
+<ul>
+<li>Configuração do arquivo persistence.xml;</li>
+</ul>
+<hr>
+<h2 id="etapas-da-parte-2">Etapas da Parte 2</h2>
+<h3 id="passo-6-configuração-do-persistence.xml">Passo 6: Configuração do <code>persistence.xml</code></h3>
+<ol>
+<li>
+<p>Clique com o botão direito no projeto &gt; New &gt; Persistence Unit.</p>
+</li>
+<li>
+<p>Em <strong>“Persistence Unit Name”</strong>, digite: pu-lpoo-card-game</p>
+</li>
+<li>
+<p>Em <strong>“Provider”</strong>, selecione: EclipseLink</p>
+</li>
+<li>
+<p>Em <strong>“Database Connection”</strong>, clique em: <strong>Nova Conexão com Banco de Dados</strong></p>
+</li>
+<li>
+<p>Na janela que abrir, escolha o driver:<br>
+➤ <strong>PostgreSQL (org.postgresql.Driver)</strong></p>
+<blockquote>
+<p>⚠️ <em>Se não aparecer, verifique se a dependência do</em> <em>org.postgresql</em> <em>está corretamente adicionada no</em> <em>pom.xml</em> <em>(veja o Passo 5 da Parte 1).</em></p>
+</blockquote>
+</li>
+<li>
+<p>Configure os dados da conexão:</p>
+</li>
+</ol>
+<ul>
+<li>Database:  db_lpoo_card_game (criada no passo 4)</li>
+<li>User:  seu_usuario_postgres</li>
+<li>Password: sua_senha</li>
+<li>Host: localhost</li>
+<li>Porta: 5432 (padrão PostgreSQL)</li>
+</ul>
+<ol start="7">
+<li>
+<p>Clique em <strong>Testar Conexão (Test Connection)</strong><br>
+→ Se estiver tudo certo, aparecerá <em>“Connection successful”</em> ✅</p>
+</li>
+<li>
+<p>Clique em <strong>Finalizar (Finish)</strong> para salvar a conexão.</p>
+</li>
+<li>
+<p>Marque a opção <strong>Create</strong> para permitir que o JPA crie automaticamente as tabelas.</p>
+</li>
+<li>
+<p>Clique em <strong>Finalizar (Finish)</strong>.</p>
+</li>
+</ol>
+<hr>
+<h3 id="passo-6.1.-ajustes-manuais-no-persistence.xml">Passo 6.1. Ajustes manuais no <code>persistence.xml</code></h3>
+<p>Após gerar o arquivo, localize-o em:</p>
+<pre><code>src/main/resources/META-INF/persistence.xml
+</code></pre>
+<ol>
+<li><strong>Altere a tag provider para:</strong></li>
+</ol>
+<pre class=" language-xml"><code class="prism  language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>provider</span><span class="token punctuation">&gt;</span></span>org.hibernate.jpa.HibernatePersistenceProvider<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>provider</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<ol start="2">
+<li><strong>Altere a propriedade de geração do schema</strong></li>
+</ol>
+<pre class=" language-xml"><code class="prism  language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>jakarta.persistence.schema-generation.database.action<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>create<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+</code></pre>
+<p>por:</p>
+<pre class=" language-xml"><code class="prism  language-xml"><span class="token comment">&lt;!-- Geração do schema --&gt;</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>javax.persistence.schema-generation.database.action<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>create<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+      
+</code></pre>
+<ol start="3">
+<li><strong>Adicione as propriedades do Hibernate dentro da tag <code>&lt;properties&gt;</code>:</strong></li>
+</ol>
+<pre class=" language-xml"><code class="prism  language-xml"><span class="token comment">&lt;!-- Propriedades do Hibernate --&gt;</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hibernate.dialect<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>org.hibernate.dialect.PostgreSQLDialect<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hibernate.show_sql<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hibernate.format_sql<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hibernate.connection.characterEncoding<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+</code></pre>
+<h3 id="passo-7-anotação-jpa-nas-classes">Passo 7: Anotação JPA nas classes</h3>
+<p>Nessa etapa vamos anotar somente a classe Carta, para isso você deve realizar as anotações JPA, a fim de que:</p>
+<ul>
+<li>O nome da tabela criada no Banco de Dados deve ser <code>tbl_carta</code></li>
+<li>O atributo <code>id</code> deve ser mapeado a fim de ser a chave primária na tabela, com geração automática e sequencial dos valores, e o nome mapeado na tabela deve ser <code>car_id</code></li>
+<li>Atributos nome, ataque e defesa devem ser obrigatórios, e seguir o padrão de nome <code>car_nome</code>, <code>car_ataque</code> e <code>car_defesa</code></li>
+<li>Atributos categoria e raridade devem ser opcionais e seguir o padrão de nome <code>car_categoria</code> e <code>car_raridade</code></li>
+<li>Definir a Categoria como String, para mapear no banco de dados os nomes <code>Monstro</code>, <code>Magia</code> ou <code>Armadura</code> como texto, utilizar a anotação: <code>@Enumerated(EnumType.STRING)</code></li>
+</ul>
+<blockquote>
+<p>caso contrário enum são mapeados no BD como um int referindo o índice da lista que foram informados.</p>
+</blockquote>
+<ul>
+<li>Obs: O enum Categoria deve ser criado normalmente e não precisa de anotação direta no enum.</li>
+</ul>
+
+<div id="tutorial-navigation">
+  <button onclick="history.back()">← Voltar</button>
+  <button onclick="window.location.href='lpoo-projectCardGame-p3.html'">Próxima Parte →</button>
+</div>
+</div>
+
+<div id="footer-lpoo-placeholder"></div>
+
+    <div id="footer-placeholder"></div>
+  
+  
+    <script>
+  
+  
+      document.addEventListener("DOMContentLoaded", function () {
+  
+        // Carregar header
+        fetch("../../includes/header.html")
+          .then(response => response.text())
+          .then(data => document.getElementById("header-placeholder").innerHTML = data);
+  
+        // Carregar footer
+        fetch("../../includes/footer.html")
+          .then(response => response.text())
+          .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+  
+        // Carregar footer - LPOO
+        fetch("includes/footer-lpoo.html")
+          .then(response => response.text())
+          .then(data => document.getElementById("footer-lpoo-placeholder").innerHTML = data);
+  
+        // Carregar header - LPOO
+        fetch("includes/header-lpoo.html")
+          .then(response => response.text())
+          .then(data => document.getElementById("header-lpoo-placeholder").innerHTML = data);
+      });
+    </script>
+</body>
+
+</html>

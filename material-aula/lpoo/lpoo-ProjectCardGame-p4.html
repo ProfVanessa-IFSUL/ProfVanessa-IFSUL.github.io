@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOO - Introdução OO</title>
+    <link rel="stylesheet" href="https://stackedit.io/style.css" />
+    <link rel="stylesheet" href="../../css/estilo.css">
+  </head>
+  
+  
+  
+  <body class="stackedit">
+    <div id="header-placeholder"></div>
+  
+  
+  
+  
+    <div class="container-disciplina">
+      <div id="header-lpoo-placeholder"></div>
+      <h2 id="objetivo-desse-tutorial">Objetivo desse Tutorial (Parte 4)</h2>
+<p>Nesta quarta parte do projeto <strong>LPOO Card Games</strong>, vamos implementar um padrão de acesso a dados utilizando <strong>JPA</strong> a fim de permitir operações básicas:</p>
+<ul>
+<li>Abrir e fechar conexões com o banco de dados;</li>
+<li>Realizar operações CRUD (Create, Read, Update, Delete);</li>
+</ul>
+<hr>
+<h2 id="etapas-parte-4">Etapas parte 4</h2>
+<h3 id="passo-9---criação-da-interface-e-classe-de-persistência">Passo 9 - Criação da Interface e Classe de Persistência</h3>
+<h4 id="objetivo">Objetivo</h4>
+<p>Implementar um padrão de acesso a dados utilizando <strong>JPA</strong> através de uma <strong>interface genérica (InterfaceBD)</strong>, e sua implementação concreta (PersistenciaJPA).</p>
+<h4 id="passo-9.1---criar-a-interface--interfacebd">Passo 9.1 - Criar a Interface  <code>InterfaceBD</code></h4>
+<p>No pacote <code>control</code>, crie a Interface <code>InterfaceBD</code> :</p>
+<pre class=" language-java"><code class="prism  language-java">
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">InterfaceBD</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> Boolean <span class="token function">conexaoAberta</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">fecharConexao</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> Object <span class="token function">find</span><span class="token punctuation">(</span>Class <span class="token class-name">c</span><span class="token punctuation">,</span> Object id<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">persist</span><span class="token punctuation">(</span>Object o<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">remover</span><span class="token punctuation">(</span>Object o<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="passo-9.2---criar-a-classe--persistenciajpa">Passo 9.2 - Criar a Classe  <code>PersistenciaJPA</code></h4>
+<p>No mesmo pacote, <code>control</code>, crie a classe <code>PersistenciaJPA</code> :</p>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">import</span> javax<span class="token punctuation">.</span>persistence<span class="token punctuation">.</span>*<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PersistenciaJPA</span> <span class="token keyword">implements</span> <span class="token class-name">InterfaceBD</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> EntityManager entity<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> EntityManagerFactory factory<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">PersistenciaJPA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        factory <span class="token operator">=</span> Persistence<span class="token punctuation">.</span><span class="token function">createEntityManagerFactory</span><span class="token punctuation">(</span><span class="token string">"pu-lpoo-card-game"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        entity <span class="token operator">=</span> factory<span class="token punctuation">.</span><span class="token function">createEntityManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Boolean <span class="token function">conexaoAberta</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> entity <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> entity<span class="token punctuation">.</span><span class="token function">isOpen</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">fecharConexao</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>entity <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> entity<span class="token punctuation">.</span><span class="token function">isOpen</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            entity<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Object <span class="token function">find</span><span class="token punctuation">(</span>Class <span class="token class-name">c</span><span class="token punctuation">,</span> Object id<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">getEntityManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">persist</span><span class="token punctuation">(</span>Object o<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+        entity <span class="token operator">=</span> <span class="token function">getEntityManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            entity<span class="token punctuation">.</span><span class="token function">getTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>entity<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                o <span class="token operator">=</span> entity<span class="token punctuation">.</span><span class="token function">merge</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            entity<span class="token punctuation">.</span><span class="token function">persist</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            entity<span class="token punctuation">.</span><span class="token function">getTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>entity<span class="token punctuation">.</span><span class="token function">getTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">isActive</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                entity<span class="token punctuation">.</span><span class="token function">getTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">rollback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            Logger<span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span>PersistenciaJPA<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Level<span class="token punctuation">.</span>SEVERE<span class="token punctuation">,</span> <span class="token string">"Erro ao persistir: "</span> <span class="token operator">+</span> o<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getSimpleName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">throw</span> e<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">remover</span><span class="token punctuation">(</span>Object o<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+        entity <span class="token operator">=</span> <span class="token function">getEntityManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            entity<span class="token punctuation">.</span><span class="token function">getTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>entity<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                o <span class="token operator">=</span> entity<span class="token punctuation">.</span><span class="token function">merge</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            entity<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            entity<span class="token punctuation">.</span><span class="token function">getTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>entity<span class="token punctuation">.</span><span class="token function">getTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">isActive</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                entity<span class="token punctuation">.</span><span class="token function">getTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">rollback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            Logger<span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span>PersistenciaJPA<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Level<span class="token punctuation">.</span>SEVERE<span class="token punctuation">,</span> <span class="token string">"Erro ao remover: "</span> <span class="token operator">+</span> o<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getSimpleName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">throw</span> e<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> EntityManager <span class="token function">getEntityManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>entity <span class="token operator">==</span> null <span class="token operator">||</span> <span class="token operator">!</span>entity<span class="token punctuation">.</span><span class="token function">isOpen</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            entity <span class="token operator">=</span> factory<span class="token punctuation">.</span><span class="token function">createEntityManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> entity<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 🔄 Método para listar todas as Cartas</span>
+    <span class="token keyword">public</span> List<span class="token operator">&lt;</span>Carta<span class="token operator">&gt;</span> <span class="token function">getCartas</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        entity <span class="token operator">=</span> <span class="token function">getEntityManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            TypedQuery<span class="token operator">&lt;</span>Carta<span class="token operator">&gt;</span> query <span class="token operator">=</span> entity<span class="token punctuation">.</span><span class="token function">createQuery</span><span class="token punctuation">(</span><span class="token string">"SELECT c FROM Carta c"</span><span class="token punctuation">,</span> Carta<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> query<span class="token punctuation">.</span><span class="token function">getResultList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Logger<span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span>PersistenciaJPA<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Level<span class="token punctuation">.</span>SEVERE<span class="token punctuation">,</span> <span class="token string">"Erro ao buscar cartas"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="📌-lembretes"><strong>📌 Lembretes</strong></h3>
+<ul>
+<li>
+<p>📦 Certifique-se de que a classe Carta esteja corretamente anotada com javax.persistence (@Entity, @Id, etc.) – passo 7 da parte 2.</p>
+</li>
+<li>
+<p>⚠️ O persistence.xml deve estar configurado com javax.persistence e apontando para o provedor <strong>Hibernate</strong> – passo 6 da parte 2.</p>
+</li>
+</ul>
+
+<div id="tutorial-navigation">
+    <button onclick="history.back()">← Voltar</button>
+    <button onclick="window.location.href='lpoo-projectCardGame-p5.html'">Próxima Parte →</button>
+  </div>
+  </div>
+  
+  <div id="footer-lpoo-placeholder"></div>
+  
+      <div id="footer-placeholder"></div>
+    
+    
+      <script>
+    
+    
+        document.addEventListener("DOMContentLoaded", function () {
+    
+          // Carregar header
+          fetch("../../includes/header.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("header-placeholder").innerHTML = data);
+    
+          // Carregar footer
+          fetch("../../includes/footer.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+    
+          // Carregar footer - LPOO
+          fetch("includes/footer-lpoo.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("footer-lpoo-placeholder").innerHTML = data);
+    
+          // Carregar header - LPOO
+          fetch("includes/header-lpoo.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("header-lpoo-placeholder").innerHTML = data);
+        });
+      </script>
+</body>
+
+</html>
