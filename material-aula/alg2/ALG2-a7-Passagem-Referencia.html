@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALG2 - Passagem por Referência vs valor</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <link rel="stylesheet" href="../../css/estilo.css">
+</head>
+
+<body class="stackedit">
+    <div id="header-placeholder"></div>
+    <div id="header-alg2-placeholder"></div>
+    
+
+
+<h2 id="passagem-por-valor-e-por-referência-com-funções-e-structs-–-c">Passagem por Valor e por Referência com Funções e Structs – C++</h2>
+<h2 id="objetivo-da-aula">Objetivo da Aula</h2>
+<p>Nesta aula, aprenderemos:</p>
+<ul>
+<li>O que são referências e como funcionam em C++</li>
+<li>Diferença entre <strong>passagem por valor</strong> e <strong>por referência</strong></li>
+<li>Aplicação prática com <code>struct</code></li>
+<li>Como aplicar referências para manipular variáveis dentro de funções</li>
+</ul>
+<hr>
+<h2 id="o-que-é-uma-referência">1. O que é uma Referência?</h2>
+<p>Uma <strong>referência</strong> é um <strong>apelido para uma variável existente</strong>.</p>
+<p>Ela permite acessar diretamente a variável original, sem criar cópias.</p>
+<h3 id="📌-exemplo-de-sintaxe">📌 Exemplo de Sintaxe:</h3>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">&amp;</span>ref <span class="token operator">=</span> a<span class="token punctuation">;</span> <span class="token comment">// ref é uma referência a a</span>
+</code></pre>
+<h3 id="importante"><strong>Importante:</strong></h3>
+<ul>
+<li>Uma vez criada, a referência <strong>não pode apontar para outra variável</strong>.</li>
+<li>Referências são úteis quando queremos <strong>modificar valores fora da função</strong>.</li>
+</ul>
+<h2 id="passagem-por-valor-vs-por-referência"><strong>2. Passagem por Valor vs Por Referência</strong></h2>
+<h3 id="passagem-por-valor">2.1. Passagem Por Valor</h3>
+<ul>
+<li>A função recebe uma <strong>cópia</strong> do valor.</li>
+<li>Alterações <strong>não afetam a variável original</strong>.</li>
+</ul>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token keyword">void</span> <span class="token function">dobrar</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    x <span class="token operator">*</span><span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token function">dobrar</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Quanto vale a?</span>
+</code></pre>
+<h3 id="passagem-por-referência">2.2. Passagem Por Referência</h3>
+<ul>
+<li>A função recebe uma <strong>referência (apelido)</strong> da variável original.</li>
+<li>Alterações <strong>afetam a variável fora da função</strong>.</li>
+</ul>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token keyword">void</span> <span class="token function">dobrar</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">&amp;</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    x <span class="token operator">*</span><span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token function">dobrar</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Quanto vale a?</span>
+</code></pre>
+<h2 id="uso-com-structs">3. Uso com Structs</h2>
+<h3 id="exemplo-passagem-por-valor">3.1. Exemplo: Passagem por Valor</h3>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token keyword">struct</span> Produto <span class="token punctuation">{</span>
+    string nome<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> preco<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">alteraPreco</span><span class="token punctuation">(</span>Produto p<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    p<span class="token punctuation">.</span>preco <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+Produto caneta <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"Caneta"</span><span class="token punctuation">,</span> <span class="token number">5.0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token function">alteraPreco</span><span class="token punctuation">(</span>caneta<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Qual o valor da caneta depois dessa linha?</span>
+</code></pre>
+<h3 id="exemplo-passagem-por-referência">3.2. Exemplo: Passagem por Referência</h3>
+<p>Considere a seguinte alteração no código:</p>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+<span class="token keyword">void</span> <span class="token function">alteraPreco</span><span class="token punctuation">(</span>Produto <span class="token operator">&amp;</span>p<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    p<span class="token punctuation">.</span>preco <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+Produto caneta <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"Caneta"</span><span class="token punctuation">,</span> <span class="token number">5.0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token function">alteraPreco</span><span class="token punctuation">(</span>caneta<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Qual o valor da caneta depois dessa linha?</span>
+</code></pre>
+<hr>
+<h2 id="resumo-comparativo-passagem-por-valor-vs-passagem-por-referência">4. Resumo Comparativo: Passagem por Valor vs Passagem por Referência</h2>
+<h2 id="conceitos">4.1. Conceitos</h2>
+<h3 id="passagem-por-valor-1">Passagem por Valor</h3>
+<ul>
+<li>A função <strong>recebe uma cópia</strong> do valor da variável.</li>
+<li>Alterações feitas na função <strong>não afetam</strong> a variável original.</li>
+<li><strong>Mais segura</strong>, pois não modifica dados fora da função.</li>
+</ul>
+<h3 id="passagem-por-referência-1">Passagem por Referência</h3>
+<ul>
+<li>A função recebe um <strong>apelido (referência)</strong> da variável original.</li>
+<li>Alterações feitas na função <strong>afetam a variável original</strong> diretamente.</li>
+<li><strong>Mais eficiente</strong> em termos de memória ao lidar com structs, arrays e objetos grandes.</li>
+<li>Indicado para usar com: struct \ array.</li>
+</ul>
+<hr>
+<h2 id="sintaxe-comparativa">Sintaxe Comparativa</h2>
+
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Sintaxe da função</th>
+<th>Chamada da função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Por valor</td>
+<td><code>void func(int x)</code></td>
+<td><code>func(a);</code></td>
+</tr>
+<tr>
+<td>Por referência</td>
+<td><code>void func(int &amp;x)</code></td>
+<td><code>func(a);</code></td>
+</tr>
+</tbody>
+</table><hr>
+<h2 id="dicas-importantes">5. Dicas Importantes</h2>
+<ul>
+<li>Toda <strong>referência</strong> é declarada com &amp; na função.</li>
+<li>A chamada da função é <strong>igual</strong> nos dois casos (func(a);).</li>
+<li>Ao passar por valor, a função <strong>trabalha com uma cópia</strong> e libera a memória ao final.</li>
+<li>Passagem por valor é mais <strong>seguro</strong>, mas por referência é mais <strong>eficiente</strong>.</li>
+</ul>
+<hr>
+<h2 id="atividade">6. Atividade</h2>
+<p>Implemente um programa em C++ para controlar os dados de um livro utilizando uma struct.</p>
+<p>O programa deve:</p>
+<ol>
+<li>
+<p>Criar uma struct Livro contendo os seguintes campos:</p>
+<ul>
+<li>titulo (string)</li>
+<li>autor (string)</li>
+<li>preco (float)</li>
+</ul>
+</li>
+<li>
+<p>Implementar as seguintes funções:</p>
+<ul>
+<li>void preencherLivro(Livro &amp;l);<br>
+→ Recebe um livro por <strong>referência</strong> e lê os dados do usuário.</li>
+<li>void aplicarDesconto(Livro &amp;l, float percentual);<br>
+→ Aplica um desconto percentual no preço do livro, <strong>alterando o valor original</strong>.</li>
+<li>void exibirLivro(Livro l);<br>
+→ Mostra os dados do livro, <strong>sem alterar os valores</strong>.</li>
+</ul>
+</li>
+<li>
+<p>No main, declare uma variável do tipo Livro, preencha os dados, aplique um desconto de 10% e exiba o resultado.</p>
+</li>
+</ol>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iomanip&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> Livro <span class="token punctuation">{</span>
+    string titulo<span class="token punctuation">;</span>
+    string autor<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> preco<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">preencherLivro</span><span class="token punctuation">(</span>Livro <span class="token operator">&amp;</span>l<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">aplicarDesconto</span><span class="token punctuation">(</span>Livro <span class="token operator">&amp;</span>l<span class="token punctuation">,</span> <span class="token keyword">float</span> percentual<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">exibirLivro</span><span class="token punctuation">(</span>Livro l<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Livro meuLivro<span class="token punctuation">;</span>
+    <span class="token function">preencherLivro</span><span class="token punctuation">(</span>meuLivro<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">aplicarDesconto</span><span class="token punctuation">(</span>meuLivro<span class="token punctuation">,</span> <span class="token number">10.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 10% de desconto</span>
+    <span class="token function">exibirLivro</span><span class="token punctuation">(</span>meuLivro<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>Dica:</strong>  Use cin.ignore() após cin &gt;&gt; ao ler getline para evitar problemas de buffer - ou outra alternativa de limpeza do buffer.</p>
+<div id="footer-alg2-placeholder"></div>
+  
+      <div id="footer-placeholder"></div>
+    
+    
+      <script>
+    
+    
+        document.addEventListener("DOMContentLoaded", function () {
+    
+          // Carregar header
+          fetch("../../includes/header.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("header-placeholder").innerHTML = data);
+    
+          // Carregar footer
+          fetch("../../includes/footer.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+    
+          // Carregar footer - LPOO
+          fetch("includes/footer-alg2.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("footer-alg2-placeholder").innerHTML = data);
+    
+          // Carregar header - LPOO
+          fetch("includes/header-alg2.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("header-alg2-placeholder").innerHTML = data);
+        });
+      </script>
+</body>
+
+</html>
