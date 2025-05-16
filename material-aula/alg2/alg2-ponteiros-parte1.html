@@ -1,0 +1,197 @@
+﻿<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALG2 - Passagem por Referência vs valor</title>
+    <link rel="stylesheet" href="https://stackedit.io/style.css" />
+    <link rel="stylesheet" href="../../css/estilo.css">
+</head>
+
+<body class="stackedit">
+    <div id="header-placeholder"></div>
+    <div class="container-disciplina">
+
+<h2 id="ponteiros-em-c-parte-1">Ponteiros em C++: parte 1</h2>
+<h3 id="objetivo-da-aula">Objetivo da Aula</h3>
+<ul>
+<li>Compreender o que são ponteiros e endereços de memória.</li>
+<li>Aprender a declarar e manipular ponteiros.</li>
+<li>Entender o funcionamento dos operadores <code>&amp;</code> e <code>*</code>.</li>
+<li>Utilizar ponteiros para modificar variáveis em diferentes escopos, como em funções.</li>
+<li>Aplicar ponteiros com tipos de dados mais complexos, como <code>struct</code>.</li>
+<li>Explorar a relação entre ponteiros e arrays.</li>
+<li>Discutir a importância e os riscos no uso de ponteiros.</li>
+<li>Comparar a passagem por referência com a passagem por valor e a relevância dos ponteiros nesse contexto.</li>
+</ul>
+<h2 id="o-que-é-um-ponteiro">1. O que é um Ponteiro?</h2>
+<ul>
+<li>Definição: Um <strong>ponteiro armazena o endereço de memória de outra variável</strong>, ou seja, <strong>aponta</strong> para um endereço de memória.</li>
+<li>Indica em que parte da memória do computador uma variável está alocada.</li>
+<li>Seu valor indica onde uma variável está armazenada, <strong>não o que está armazenado</strong> nesse local, embora possa ser usado para acessar o valor.</li>
+<li>Proporciona um modo de acesso a uma variável sem referi-la diretamente pelo nome.</li>
+<li>Ponteiros são utilizados em situações em que o uso do nome de uma variável não é permitido, impossível ou indesejável.</li>
+<li>Motivos para usar ponteiros incluem manipular elementos de array, receber argumentos em funções que necessitam modificar o valor original, manipular estruturas de dados complexas, alocar memória dinamicamente, manipular strings entre funções e manipular referências de endereços de memória entre funções.</li>
+</ul>
+<h3 id="declarando-variáveis-do-tipo-ponteiro">2. Declarando Variáveis do Tipo Ponteiro</h3>
+<ul>
+<li>Para manipular ponteiros, utilizamos o operador indireto (<code>*</code>).</li>
+<li>Sintaxe básica: <code>tipo *nome_ponteiro;</code>.</li>
+<li>Exemplos:
+<ul>
+<li><code>int *p;</code> // ponteiro para um inteiro</li>
+<li><code>char *p;</code> // ponteiro para um caractere</li>
+<li><code>string *s1;</code> // ponteiro para uma string</li>
+</ul>
+</li>
+<li>É possível declarar múltiplos ponteiros na mesma linha: <code>int *p, *p1, *p2;</code>.</li>
+<li>Um ponteiro pode ser declarado e inicializado com um endereço na mesma linha: <code>int *p = &amp;x;</code> (desde que <code>x</code> já esteja declarada).</li>
+</ul>
+<h3 id="operadores-de-ponteiro--e-">3. Operadores de Ponteiro: <code>&amp;</code> e <code>*</code></h3>
+<ul>
+<li>
+<p><strong>Operador <code>&amp;</code> (endereço-de):</strong></p>
+<ul>
+<li>Utilizado para obter o <strong>endereço de memória</strong> de uma variável.</li>
+<li>Todo ponteiro, após ter sido definido, deve indicar a qual endereço de memória ele se refere, utilizando o operador <code>&amp;</code>.</li>
+<li>Exemplo: <code>px = &amp;x;</code> significa que <code>px</code> recebe o endereço de <code>x</code> ou <code>px</code> aponta para o endereço de memória de <code>x</code>.</li>
+<li>Também pode ser usado para obter a posição de memória onde o próprio ponteiro está localizado: <code>&amp;p</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Operador <code>*</code> (desreferência):</strong></p>
+<ul>
+<li>É complementar ao operador <code>&amp;</code>.</li>
+<li>Usado para <strong>retornar ou manipular o valor da variável localizada no endereço apontado pelo ponteiro</strong>.</li>
+<li>Ao usar o operador <code>*</code> antes do nome do ponteiro (<code>*p</code>), você está acessando ou modificando o valor armazenado no endereço para o qual o ponteiro aponta.</li>
+<li>Exemplo: <code>*px += 7;</code> modifica o valor da variável para a qual <code>px</code> aponta (a variável <code>x</code> no exemplo dado).</li>
+</ul>
+</li>
+<li>
+<p><strong>Exibindo Ponteiros e Valores:</strong></p>
+<ul>
+<li><code>cout &lt;&lt; px;</code> // mostra o endereço de memória para onde o ponteiro aponta.</li>
+<li><code>cout &lt;&lt; *px;</code> // mostra o valor no endereço apontado.</li>
+<li><code>cout &lt;&lt; &amp;px;</code> // mostra o endereço de memória do ponteiro.</li>
+</ul>
+</li>
+</ul>
+<h3 id="ponteiros-e-funções-passagem-por-ponteiro">4. Ponteiros e Funções (Passagem por Ponteiro)</h3>
+<ul>
+<li>Uma função não pode alterar diretamente valores de variáveis da função que a chamou.</li>
+<li>Utilizando <strong>ponteiros</strong>, é possível alterar valores de variáveis através de seus endereços de memória.</li>
+<li>Se passarmos para uma função os endereços de memória das variáveis, a função pode indiretamente alterar seus valores.</li>
+<li>Na assinatura da função, o parâmetro é declarado como um ponteiro para o tipo de dado da variável que será modificada.</li>
+<li>Dentro da função, o operador <code>*</code> é usado para acessar e modificar o valor no endereço apontado pelo ponteiro</li>
+<li>Exemplo de função que recebe ponteiros e modifica os valores das variáveis originais:<pre class=" language-c"><code class="prism ++ language-c"><span class="token keyword">void</span> <span class="token function">dobro</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">*</span>x <span class="token operator">=</span> <span class="token operator">*</span>x <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment">// Modifica o valor da variável cujo endereço está em x</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Chamada na função principal: </span>
+<span class="token keyword">int</span> n1 <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token function">dobro</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>n1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// n1 vale 6</span>
+</code></pre>
+<ul>
+<li>O ponteiros <code>x</code> manipula o endereço da variável <code>n1</code> da função chamadora.</li>
+</ul>
+</li>
+</ul>
+<h3 id="ponteiros-e-structs">5. Ponteiros e Structs</h3>
+<ul>
+<li>
+<p>É possível definir ponteiros para variáveis de tipos diferenciados, como <code>struct</code>.</p>
+</li>
+<li>
+<p>O ponteiro para uma struct deve ser definido do mesmo tipo da struct.</p>
+</li>
+<li>
+<p>Ao utilizar o ponteiro para referenciar os membros da struct, ele deve estar entre parênteses ou usar o <strong>operador de apontador <code>-&gt;</code></strong>.</p>
+<ul>
+<li>
+<p>Para acessar ou modificar os membros de uma struct através de um ponteiro, você deve usar o ponteiro entre parênteses com o operador <code>.</code> (ponto), como <code>(*ponteiro).membro</code>, ou, de forma mais comum e direta, utilizar o operador de apontador <code>-&gt;</code></p>
+</li>
+<li>
+<p>A notação <code>ponteiro-&gt;membro</code> é equivalente a <code>(*ponteiro).membro</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Exemplo de função que recebe um ponteiro para uma struct e modifica um membro:</p>
+<pre class=" language-c"><code class="prism ++ language-c"><span class="token keyword">struct</span> dados <span class="token punctuation">{</span> <span class="token comment">// Exemplo de struct</span>
+    <span class="token keyword">int</span> numero<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> nome<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">leitura</span><span class="token punctuation">(</span>dados <span class="token operator">*</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// A função recebe um ponteiro para dados</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"informe o numero: "</span><span class="token punctuation">;</span>
+    cin <span class="token operator">&gt;&gt;</span> x<span class="token operator">-&gt;</span>numero<span class="token punctuation">;</span> <span class="token comment">// Acessa e modifica o membro 'numero' usando -&gt;</span>
+    <span class="token comment">// Equivalente: cin &gt;&gt; (*x).numero;</span>
+    <span class="token comment">// fflush(stdin); // Exemplo de limpeza de buffer</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// Chamada na função principal: leitura(&amp;cadastro);</span>
+</code></pre>
+</li>
+</ul>
+<h3 id="ponteiros-e-arrays">6. Ponteiros e Arrays</h3>
+<ul>
+<li>Em C, quando se refere a um vetor sem especificar seu índice (somente com o nome da variável), se está referenciando o <strong>endereço de memória da 1ª posição</strong> de um vetor.</li>
+<li>Em C++, o nome de um array é um <strong>ponteiro constante</strong> para o primeiro elemento do array.
+<ul>
+<li>Isso significa que o nome do array (<code>vetor</code>) representa o endereço de memória onde se inicia o armazenamento do vetor.</li>
+<li>Portanto, <code>&amp;vetor[0]</code> é o mesmo que <code>vetor</code>.</li>
+</ul>
+</li>
+<li>Acessar o valor do primeiro elemento pode ser feito com <code>*vetor</code> ou <code>vetor[0]</code> (sem o asterisco, pois o índice indica o conteúdo).</li>
+<li><strong>Inicializando um ponteiro para um array:</strong><pre class=" language-c"><code class="prism ++ language-c"><span class="token keyword">int</span> vetor<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// Exemplo de array</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>pVetor<span class="token punctuation">;</span>
+pVetor <span class="token operator">=</span> <span class="token operator">&amp;</span>vetor<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// Ponteiro recebe o endereço do primeiro elemento</span>
+<span class="token comment">// OU simplesmente:</span>
+pVetor <span class="token operator">=</span> vetor<span class="token punctuation">;</span> <span class="token comment">// Ponteiro recebe o endereço do array (primeiro elemento)</span>
+</code></pre>
+</li>
+<li>Não é preciso que o ponteiro seja um vetor, pois apontando para o início da memória do vetor, é possível percorrê-lo indicando o deslocamento (posição) que se quer acessar (Conteúdo disponível na parte 2 do material).</li>
+</ul>
+<h3 id="dicas-importantes-e-cuidados-com-ponteiros">7. Dicas Importantes e Cuidados com Ponteiros</h3>
+<ul>
+<li>
+<p>A primeira coisa a ter em mente é que um ponteiro <strong>não está apontando para nenhum lugar até que atribuímos a ele o endereço de uma outra variável</strong> ou alocamos um endereço em memória para ele.</p>
+</li>
+<li>
+<p>Um programa entra em colapso absoluto se tentarmos acessar um ponteiro que aponta para um local de memória que já foi liberado novamente ao sistema.</p>
+</li>
+</ul>
+</div>
+    </div>
+    <div id="footer-alg2-placeholder"></div>
+
+    <div id="footer-placeholder"></div>
+
+
+    <script>
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // Carregar header
+            fetch("../../includes/header.html")
+                .then(response => response.text())
+                .then(data => document.getElementById("header-placeholder").innerHTML = data);
+
+            // Carregar footer
+            fetch("../../includes/footer.html")
+                .then(response => response.text())
+                .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+
+            // Carregar footer - LPOO
+            fetch("includes/footer-alg2.html")
+                .then(response => response.text())
+                .then(data => document.getElementById("footer-alg2-placeholder").innerHTML = data);
+
+            // Carregar header - LPOO
+            fetch("includes/header-alg2.html")
+                .then(response => response.text())
+                .then(data => document.getElementById("header-alg2-placeholder").innerHTML = data);
+        });
+    </script>
+</body>
+
+</html>
