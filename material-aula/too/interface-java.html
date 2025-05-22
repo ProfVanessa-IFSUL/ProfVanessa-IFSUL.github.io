@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOO - Interface em Java</title>
+    <link rel="stylesheet" href="https://stackedit.io/style.css" />
+    <link rel="stylesheet" href="../../css/estilo.css">
+</head>
+
+
+
+<body class="stackedit">
+    <div id="header-placeholder"></div>
+
+
+
+
+    <div class="container-disciplina">
+      <div id="header-too-placeholder"></div>
+      
+<h2 id="orientação-a-objetos-pilares-abstração-e-polimorfismo">Orientação a Objetos: Pilares Abstração e Polimorfismo</h2>
+<h3 id="aula-5---uso-de-interface">Aula 5 - Uso de Interface:</h3>
+<h4 id="contexto">Contexto:</h4>
+<p>Atualmente, diversas classes no sistema da academia possuem o método exibirDados(), como:</p>
+<ul>
+<li>Pessoa (e suas subclasses Aluno, Professor, AlunoConvenio)</li>
+<li>Plano</li>
+<li>AvaliacaoFisica</li>
+</ul>
+<p>Porém, <strong>cada uma implementa esse método do seu jeito</strong>, o que gera <strong>repetição</strong> e <strong>dificuldade de reaproveitamento</strong>.</p>
+<h3 id="solução-proposta-interface--classe-utilitária"><strong>Solução Proposta: Interface + Classe Utilitária</strong></h3>
+<ul>
+<li><strong>Objetivo</strong>: padronizar a exibição de dados em todas as classes.</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Interface <code>Exibivel</code></strong></td>
+<td>Padroniza o método <code>exibirDados()</code> para diferentes classes</td>
+</tr>
+<tr>
+<td><strong>Classe <code>Impressora</code></strong></td>
+<td>Classe utilitária que imprime objetos que implementam <code>Exibivel</code></td>
+</tr>
+<tr>
+<td><strong>Pessoa / Aluno / etc.</strong></td>
+<td>Implementam <code>Exibivel</code> para fornecer sua própria forma de exibição</td>
+</tr>
+</tbody>
+</table><hr>
+<h2 id="o-que-é-uma-interface-em-java">O que é uma Interface em Java?</h2>
+<p>Uma <strong>interface</strong> em Java é um <strong>contrato</strong> que define um <strong>conjunto de métodos</strong> que uma classe <strong>se compromete a implementar</strong>.<br>
+Ela diz <strong>“o que fazer”</strong>, mas <strong>não “como fazer”</strong>, ou seja, ela <strong>não contém a implementação dos métodos</strong>, apenas suas <strong>assinaturas</strong>.</p>
+<h3 id="para-que-serve-uma-interface"><strong>Para que serve uma interface?</strong></h3>
+<ul>
+<li><strong>Padronizar comportamentos</strong> em diferentes classes</li>
+<li><strong>Permitir polimorfismo</strong> (usar diferentes classes como se fossem do mesmo tipo)</li>
+<li>Reduzir o acoplamento, facilitando a manutenção e expansão do código</li>
+</ul>
+<hr>
+<p><strong>Passo a passo para a nossa solução:</strong></p>
+<p>Cada classe que deseja exibir seus dados deve <strong>implementar a interface</strong> e sobrescrever o método <code>exibirDados()</code>.</p>
+<ul>
+<li><strong>Passo 1</strong>: Criar a interface <code>Exibivel</code></li>
+</ul>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Exibivel</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> String <span class="token function">exibirDados</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li><strong>Passo 2</strong>: Implementar a interface nas classes relevantes (Pessoa, Plano, AvaliacaoFisica), como:</li>
+</ul>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Pessoa</span> <span class="token keyword">implements</span> <span class="token class-name">Exibivel</span> <span class="token punctuation">{</span>
+	<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> String <span class="token function">exibirDados</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        DateTimeFormatter formato <span class="token operator">=</span> DateTimeFormatter<span class="token punctuation">.</span><span class="token function">ofPattern</span><span class="token punctuation">(</span><span class="token string">"dd/MM/yyyy"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        String aux <span class="token operator">=</span> <span class="token string">"Dados da Pessoa cadastrada: \n"</span><span class="token punctuation">;</span>
+        aux <span class="token operator">+=</span> <span class="token string">"Nome: "</span> <span class="token operator">+</span> nome <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>CPF <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            aux <span class="token operator">+=</span> <span class="token string">"CPF: "</span> <span class="token operator">+</span> CPF <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>dataNascimento <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            aux <span class="token operator">+=</span> <span class="token string">"Data de Nascimento: "</span> <span class="token operator">+</span> formato<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>dataNascimento<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token keyword">return</span> aux<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="diagrama-de-classes-atualizado"><strong>Diagrama de Classes Atualizado</strong></h2>
+<pre class=" language-mermaid"><svg id="mermaid-svg-XadtD0ZhlWkoESRG" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="566.9609375" style="max-width: 583.4296875px;" viewBox="-20 -20 583.4296875 566.9609375"><style>#mermaid-svg-XadtD0ZhlWkoESRG{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#000000;}#mermaid-svg-XadtD0ZhlWkoESRG .error-icon{fill:#552222;}#mermaid-svg-XadtD0ZhlWkoESRG .error-text{fill:#552222;stroke:#552222;}#mermaid-svg-XadtD0ZhlWkoESRG .edge-thickness-normal{stroke-width:2px;}#mermaid-svg-XadtD0ZhlWkoESRG .edge-thickness-thick{stroke-width:3.5px;}#mermaid-svg-XadtD0ZhlWkoESRG .edge-pattern-solid{stroke-dasharray:0;}#mermaid-svg-XadtD0ZhlWkoESRG .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-svg-XadtD0ZhlWkoESRG .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-svg-XadtD0ZhlWkoESRG .marker{fill:#666;stroke:#666;}#mermaid-svg-XadtD0ZhlWkoESRG .marker.cross{stroke:#666;}#mermaid-svg-XadtD0ZhlWkoESRG svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-svg-XadtD0ZhlWkoESRG g.classGroup text{fill:#999;fill:#111111;stroke:none;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:10px;}#mermaid-svg-XadtD0ZhlWkoESRG g.classGroup text .title{font-weight:bolder;}#mermaid-svg-XadtD0ZhlWkoESRG .classTitle{font-weight:bolder;}#mermaid-svg-XadtD0ZhlWkoESRG .node rect,#mermaid-svg-XadtD0ZhlWkoESRG .node circle,#mermaid-svg-XadtD0ZhlWkoESRG .node ellipse,#mermaid-svg-XadtD0ZhlWkoESRG .node polygon,#mermaid-svg-XadtD0ZhlWkoESRG .node path{fill:#eee;stroke:#999;stroke-width:1px;}#mermaid-svg-XadtD0ZhlWkoESRG .divider{stroke:#999;stroke:1;}#mermaid-svg-XadtD0ZhlWkoESRG g.clickable{cursor:pointer;}#mermaid-svg-XadtD0ZhlWkoESRG g.classGroup rect{fill:#eee;stroke:#999;}#mermaid-svg-XadtD0ZhlWkoESRG g.classGroup line{stroke:#999;stroke-width:1;}#mermaid-svg-XadtD0ZhlWkoESRG .classLabel .box{stroke:none;stroke-width:0;fill:#eee;opacity:0.5;}#mermaid-svg-XadtD0ZhlWkoESRG .classLabel .label{fill:#999;font-size:10px;}#mermaid-svg-XadtD0ZhlWkoESRG .relation{stroke:#666;stroke-width:1;fill:none;}#mermaid-svg-XadtD0ZhlWkoESRG .dashed-line{stroke-dasharray:3;}#mermaid-svg-XadtD0ZhlWkoESRG #compositionStart,#mermaid-svg-XadtD0ZhlWkoESRG .composition{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-XadtD0ZhlWkoESRG #compositionEnd,#mermaid-svg-XadtD0ZhlWkoESRG .composition{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-XadtD0ZhlWkoESRG #dependencyStart,#mermaid-svg-XadtD0ZhlWkoESRG .dependency{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-XadtD0ZhlWkoESRG #dependencyStart,#mermaid-svg-XadtD0ZhlWkoESRG .dependency{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-XadtD0ZhlWkoESRG #extensionStart,#mermaid-svg-XadtD0ZhlWkoESRG .extension{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-XadtD0ZhlWkoESRG #extensionEnd,#mermaid-svg-XadtD0ZhlWkoESRG .extension{fill:#666 !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-XadtD0ZhlWkoESRG #aggregationStart,#mermaid-svg-XadtD0ZhlWkoESRG .aggregation{fill:#eee !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-XadtD0ZhlWkoESRG #aggregationEnd,#mermaid-svg-XadtD0ZhlWkoESRG .aggregation{fill:#eee !important;stroke:#666 !important;stroke-width:1;}#mermaid-svg-XadtD0ZhlWkoESRG .edgeTerminals{font-size:11px;}#mermaid-svg-XadtD0ZhlWkoESRG:root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#mermaid-svg-XadtD0ZhlWkoESRG class{fill:apa;}</style><g></g><defs><marker id="extensionStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 1,7 L18,13 V 1 Z"></path></marker></defs><defs><marker id="extensionEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 1,1 V 13 L18,7 Z"></path></marker></defs><defs><marker id="compositionStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="compositionEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="aggregationStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="aggregationEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="dependencyStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 5,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="dependencyEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"></path></marker></defs><g id="classid-Pessoa-889" class="classGroup" transform="translate(42.55078125,98.140625 )"><rect x="0" y="0" width="138.15625" height="79.640625" class=" "></rect><text y="15" x="0"><tspan class="title" x="53.703125">Pessoa</tspan></text><line x1="0" y1="21.5" y2="21.5" x2="138.15625"></line><text x="5" y="31.5" fill="white" class="classText"><tspan x="5">-String nome</tspan><tspan x="5" dy="10">-LocalDate dataNascimento</tspan><tspan x="5" dy="10">-String CPF</tspan></text><line x1="0" y1="58.05078125" y2="58.05078125" x2="138.15625"></line><text x="5" y="73.05078125" fill="white" class="classText"><tspan x="5">+exibirDados() : String</tspan></text></g><g id="classid-Professor-890" class="classGroup" transform="translate(48.9296875,266.30078125 )"><rect x="0" y="0" width="112.640625" height="42.55078125" class=" "></rect><text y="15" x="0"><tspan class="title" x="34.42578125">Professor</tspan></text><line x1="0" y1="21.5" y2="21.5" x2="112.640625"></line><text x="5" y="31.5" fill="white" class="classText"><tspan x="5">-String especializacao</tspan></text><line x1="0" y1="38.05078125" y2="38.05078125" x2="112.640625"></line><text x="5" y="53.05078125" fill="white" class="classText"></text></g><g id="classid-Aluno-891" class="classGroup" transform="translate(351.5859375,227.78125 )"><rect x="0" y="0" width="191.84375" height="119.58984375" class=" "></rect><text y="15" x="0"><tspan class="title" x="82.54296875">Aluno</tspan></text><line x1="0" y1="21.5" y2="21.5" x2="191.84375"></line><text x="5" y="31.5" fill="white" class="classText"><tspan x="5">-String matricula</tspan><tspan x="5" dy="10">-LocalDate dataMatricula</tspan><tspan x="5" dy="10">-double valorMensalidade</tspan><tspan x="5" dy="10">-Plano plano</tspan><tspan x="5" dy="10">-List&lt;AvaliacaoFisica&gt; avaliacoes</tspan></text><line x1="0" y1="78" y2="78" x2="191.84375"></line><text x="5" y="93" fill="white" class="classText"><tspan x="5">+adicionarAvaliacao() : void</tspan><tspan x="5" dy="10">+getAvaliacoes() : List&lt;AvaliacaoFisica&gt;</tspan><tspan x="5" dy="10">+verificaDesconto() : void</tspan></text></g><g id="classid-Plano-892" class="classGroup" transform="translate(412.5,106.7109375 )"><rect x="0" y="0" width="90.015625" height="62.5" class=" "></rect><text y="15" x="0"><tspan class="title" x="32.15234375">Plano</tspan></text><line x1="0" y1="21.5" y2="21.5" x2="90.015625"></line><text x="5" y="31.5" fill="white" class="classText"><tspan x="5">-String nome</tspan><tspan x="5" dy="10">-String descricao</tspan><tspan x="5" dy="10">-double valor</tspan></text><line x1="0" y1="58" y2="58" x2="90.015625"></line><text x="5" y="73" fill="white" class="classText"></text></g><g id="classid-Exibivel-893" class="classGroup" transform="translate(57.609375,0.025390625 )"><rect x="0" y="0" width="115.28125" height="48.08984375" class=" "></rect><text y="15" x="0"><tspan class="title" x="39.15625">Exibivel</tspan></text><line x1="0" y1="21.5" y2="21.5" x2="115.28125"></line><text x="5" y="31.5" fill="white" class="classText"></text><line x1="0" y1="26.5" y2="26.5" x2="115.28125"></line><text x="5" y="41.5" fill="white" class="classText"><tspan x="5">+exibirDados() : String</tspan></text></g><g id="classid-AvaliacaoFisica-894" class="classGroup" transform="translate(0,397.37109375 )"><rect x="0" y="0" width="119.1796875" height="129.58984375" class=" "></rect><text y="15" x="0"><tspan class="title" x="24.25390625">AvaliacaoFisica</tspan></text><line x1="0" y1="21.5" y2="21.5" x2="119.1796875"></line><text x="5" y="31.5" fill="white" class="classText"><tspan x="5">-Aluno aluno</tspan><tspan x="5" dy="10">-LocalDate data</tspan><tspan x="5" dy="10">-double peso</tspan><tspan x="5" dy="10">-double altura</tspan><tspan x="5" dy="10">-int idade</tspan><tspan x="5" dy="10">-double imc</tspan></text><line x1="0" y1="88" y2="88" x2="119.1796875"></line><text x="5" y="103" fill="white" class="classText"><tspan x="5">+calcularIMC() : double</tspan><tspan x="5" dy="10">+calcularIdade() : void</tspan><tspan x="5" dy="10">+exibirDados() : String</tspan></text></g><g id="classid-Convenio-895" class="classGroup" transform="translate(211.5703125,256.326171875 )"><rect x="0" y="0" width="90.015625" height="62.5" class=" "></rect><text y="15" x="0"><tspan class="title" x="23.3828125">Convenio</tspan></text><line x1="0" y1="21.5" y2="21.5" x2="90.015625"></line><text x="5" y="31.5" fill="white" class="classText"><tspan x="5">-String nome</tspan><tspan x="5" dy="10">-String descricao</tspan><tspan x="5" dy="10">-double valor</tspan></text><line x1="0" y1="58" y2="58" x2="90.015625"></line><text x="5" y="73" fill="white" class="classText"></text></g><g id="classid-AlunoConvenio-896" class="classGroup" transform="translate(300.87109375,440.916015625 )"><rect x="0" y="0" width="102.34375" height="42.5" class=" "></rect><text y="15" x="0"><tspan class="title" x="16.171875">AlunoConvenio</tspan></text><line x1="0" y1="21.5" y2="21.5" x2="102.34375"></line><text x="5" y="31.5" fill="white" class="classText"><tspan x="5">-Convenio convenio</tspan></text><line x1="0" y1="38" y2="38" x2="102.34375"></line><text x="5" y="53" fill="white" class="classText"></text></g><g id="classid-Impressora-897" class="classGroup" transform="translate(222.890625,0 )"><rect x="0" y="0" width="164.2578125" height="48.140625" class=" "></rect><text y="15" x="0"><tspan class="title" x="56.73828125">Impressora</tspan></text><line x1="0" y1="21.55078125" y2="21.55078125" x2="164.2578125"></line><text x="5" y="31.55078125" fill="white" class="classText"></text><line x1="0" y1="26.55078125" y2="26.55078125" x2="164.2578125"></line><text x="5" y="41.55078125" fill="white" class="classText"><tspan x="5">+imprimirDados(Exibivel e) : void</tspan></text></g><path d="M107.71022658792334,177.78125L107.30018882326947,181.94791666666666C106.89015105861556,186.11458333333334,106.07007552930777,194.44791666666666,105.6600377646539,209.201171875C105.25,223.95442708333334,105.25,245.12760416666666,105.25,255.71419270833334L105.25,266.30078125" id="edge865" class="relation" marker-start="url(#extensionStart)"></path><path d="M457.5078125,169.2109375L457.5078125,174.80598958333334C457.5078125,180.40104166666666,457.5078125,191.59114583333334,457.01643087306616,201.35286458333334C456.5250492461323,211.11458333333334,455.5422859922646,219.44791666666666,455.0509043653308,223.61458333333334L454.5595227383969,227.78125" id="edge866" class="relation" marker-start="url(#dependencyStart)"></path><path d="M180.70703125,163.58420301882154L198.31901041666666,170.1170441823513C215.93098958333334,176.64988534588102,251.15494791666666,189.71556767294052,279.634765625,201.96766518555094C308.1145833333333,214.21976269816136,329.8502604166667,225.65827539632275,340.7180989583333,231.37753174540342L351.5859375,237.0967880944841" id="edge867" class="relation" marker-start="url(#extensionStart)"></path><path d="M447.5078125,347.37109375L447.5078125,351.5377604166667C447.5078125,355.7044270833333,447.5078125,364.0377604166667,435.3623033776282,379.6285807291667C423.21679425525645,395.2194010416667,398.92577601051295,418.0677083333333,386.78026688814117,429.4918619791667L374.63475776576945,440.916015625" id="edge868" class="relation" marker-start="url(#extensionStart)"></path><path d="M351.5859375,318.0858439761971L323.140625,327.1333856051643C294.6953125,336.1809272341314,237.8046875,354.2760104920657,199.0703125,370.93873046607774C160.3359375,387.6014504400898,139.7578125,402.83180713017964,129.46875,410.4469854752245L119.1796875,418.06216382026946" id="edge869" class="relation" marker-start="url(#compositionStart)"></path><path d="M256.578125,318.826171875L256.578125,327.7503255208333C256.578125,336.6744791666667,256.578125,354.5227864583333,268.7236341223718,374.87109375C280.8691432447435,395.2194010416667,305.16016148948705,418.0677083333333,317.30567061185883,429.4918619791667L329.45117973423055,440.916015625" id="edge870" class="relation" marker-start="url(#dependencyStart)"></path><path d="M105.25,308.8515625L105.25,319.4381510416667C105.25,330.0247395833333,105.25,351.1979166666667,103.13127605582743,365.951171875C101.01255211165488,380.7044270833333,96.77510422330977,389.0377604166667,94.6563802791372,393.2044270833333L92.53765633496465,397.37109375" id="edge871" class="relation" marker-start="url(#dependencyStart)"></path><path d="M113.47562947157101,48.115234375L113.16784226797584,52.2861328125C112.86005506438067,56.45703125,112.24448065719032,64.798828125,111.93669345359517,73.13639322916667C111.62890625,81.47395833333333,111.62890625,89.80729166666667,111.62890625,93.97395833333333L111.62890625,98.140625" id="edge872" class="relation dashed-line" marker-start="url(#extensionStart)"></path><path d="M172.890625,32.33438530752814L220.32682291666666,39.13542525627344C267.7630208333333,45.936465205018756,362.6354166666667,59.538545102509374,410.0716145833333,71.93463713458802C457.5078125,84.33072916666667,457.5078125,95.52083333333333,457.5078125,101.11588541666667L457.5078125,106.7109375" id="edge873" class="relation dashed-line" marker-start="url(#extensionStart)"></path><path d="M62.47635400289564,48.115234375L53.32209187741304,52.2861328125C44.167829751930434,56.45703125,25.859305500965217,64.798828125,16.705043375482607,79.77311197916667C7.55078125,94.74739583333333,7.55078125,116.35416666666667,7.55078125,137.9609375C7.55078125,159.56770833333334,7.55078125,181.17447916666666,7.55078125,206.1103515625C7.55078125,231.04622395833334,7.55078125,259.3111979166667,7.55078125,287.576171875C7.55078125,315.8411458333333,7.55078125,344.1061197916667,9.965499393918796,362.4052734375C12.380217537837593,380.7044270833333,17.209653825675186,389.0377604166667,19.62437196959398,393.2044270833333L22.039090113512778,397.37109375" id="edge874" class="relation dashed-line" marker-start="url(#extensionStart)"></path></svg></pre>
+<p>Nesse contexto, A classe Impressora representa a utilidade de uma classe auxiliar (helper class) responsável por <strong>exibir os dados de objetos</strong> que implementam a interface Exibivel.</p>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Impressora</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">imprimirDados</span><span class="token punctuation">(</span>Exibivel e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token function">exibirDados</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Desse modo, a <strong>classe Impressora</strong> permite <strong>usar qualquer objeto que implemente Exibivel</strong> sem saber sua classe concreta, ou mesmo sem conhecer a implementação concreta do método <code>exibirDados()</code> de cada objeto.</p>
+<hr>
+<h2 id="resumo">Resumo:</h2>
+<h3 id="compreendendo-as-características-de-uma-interface-java">Compreendendo as características de uma Interface Java:</h3>
+
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Explicação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Não possui implementação</strong></td>
+<td>Uma interface apenas declara métodos, sem definir o corpo (lógica interna)</td>
+</tr>
+<tr>
+<td><strong>Pode ter métodos <code>default</code></strong></td>
+<td>Desde o Java 8, pode conter métodos com implementação padrão (<code>default</code>)</td>
+</tr>
+<tr>
+<td><strong>Classes implementam interfaces</strong></td>
+<td>Uma classe usa <code>implements</code> para assumir o contrato da interface</td>
+</tr>
+<tr>
+<td><strong>Múltiplas interfaces</strong></td>
+<td>Uma classe pode implementar mais de uma interface</td>
+</tr>
+<tr>
+<td><strong>Permite polimorfismo</strong></td>
+<td>Objetos de diferentes classes podem ser tratados de forma uniforme</td>
+</tr>
+<tr>
+<td><strong>Alta coesão e baixo acoplamento</strong></td>
+<td>Facilita a manutenção e reuso de código</td>
+</tr>
+</tbody>
+</table><hr>
+<ul>
+<li>
+<p><strong>Alta coesão</strong></p>
+<ul>
+<li><strong>Coesão</strong> se refere ao quão bem as <strong>responsabilidades de uma classe estão relacionadas entre si</strong>, ou seja, quando não há mistura \ confusão no código e tudo na classe está relacionado ao conceito do objeto modelado.</li>
+</ul>
+</li>
+<li>
+<p><strong>Baixo Acoplamento</strong></p>
+<ul>
+<li><strong>Acoplamento</strong> mede o <strong>nível de dependência entre diferentes classes</strong>, ou seja, quando um projeto possui baixo acoplamento, significa que as classes <strong>têm poucas dependências entre si</strong>, podendo ser modificadas classes sem impactar outras. Além disso, significa que o sistema é mais modular, testável e reutilizável.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="footer-too-placeholder"></div>
+
+    <div id="footer-placeholder"></div>
+  
+  
+    <script>
+  
+  
+      document.addEventListener("DOMContentLoaded", function () {
+  
+        // Carregar header
+        fetch("../../includes/header.html")
+          .then(response => response.text())
+          .then(data => document.getElementById("header-placeholder").innerHTML = data);
+  
+        // Carregar footer
+        fetch("../../includes/footer.html")
+          .then(response => response.text())
+          .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+  
+        // Carregar footer - TOO
+        fetch("includes/footer-too.html")
+          .then(response => response.text())
+          .then(data => document.getElementById("footer-too-placeholder").innerHTML = data);
+  
+        // Carregar header - TOO
+        fetch("includes/header-too.html")
+          .then(response => response.text())
+          .then(data => document.getElementById("header-too-placeholder").innerHTML = data);
+      });
+    </script>
+</body>
+
+</html>
