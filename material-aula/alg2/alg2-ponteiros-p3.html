@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALG2 - Alocação Dinâmica</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <link rel="stylesheet" href="../../css/estilo.css">
+</head>
+
+<body class="stackedit">
+  <div id="header-placeholder"></div>
+  <div class="container-disciplina">
+    <div id="header-alg2-placeholder"></div>
+<h2 id="ponteiros-em-c-parte-3">Ponteiros em C++: parte 3</h2>
+<h3 id="alocação-dinâmica-de-memória-em-c"><strong>Alocação Dinâmica de Memória em C++</strong></h3>
+<p>Em C++, usamos alocação dinâmica quando <strong>não sabemos o tamanho da estrutura de dados em tempo de compilação</strong>.</p>
+<ul>
+<li>
+<p>Em programas onde <strong>o tamanho dos dados só é conhecido em tempo de execução</strong>, é possível utilizar <strong>alocação dinâmica de memória</strong>.</p>
+</li>
+<li>
+<p>Permite maior <strong>flexibilidade</strong> e <strong>controle de uso de memória</strong>.</p>
+</li>
+</ul>
+<p>🔍 <em>Por que usar?</em></p>
+<ul>
+<li>Evita desperdício de memória</li>
+<li>Permite estruturas flexíveis (vetores que crescem)</li>
+<li>Fundamental para algoritmos com estruturas variáveis (ex: matrizes, listas)</li>
+</ul>
+<h3 id="conceitos-fundamentais">1. Conceitos Fundamentais</h3>
+<h4 id="o-que-é-alocação-dinâmica">1.1. O que é Alocação Dinâmica?</h4>
+<blockquote>
+<p>Processo de <strong>reservar memória em tempo de execução</strong> (durante a execução do programa), ao invés de fixá-la em tempo de compilação.</p>
+</blockquote>
+<h4 id="ponteiros-e-memória-dinâmica">1.2. Ponteiros e Memória Dinâmica</h4>
+<ul>
+<li>
+<p>O compilador normalmente aloca memória para variáveis comuns.</p>
+</li>
+<li>
+<p>Com <strong>ponteiros</strong>, podemos armazenar o endereço da memória alocada dinamicamente com <code>new</code>.</p>
+</li>
+</ul>
+<h3 id="operadores-new-e-delete">2. Operadores <code>new</code> e <code>delete</code></h3>
+
+<table>
+<thead>
+<tr>
+<th>Operador</th>
+<th>Finalidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>new</code></td>
+<td>Aloca memória dinamicamente</td>
+</tr>
+<tr>
+<td><code>delete</code></td>
+<td>Libera memória de <strong>um único valor</strong></td>
+</tr>
+<tr>
+<td><code>delete[]</code></td>
+<td>Libera memória de <strong>um vetor</strong></td>
+</tr>
+</tbody>
+</table><hr>
+<h4 id="alocando-um-valor">2.1. Alocando um valor</h4>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token keyword">int</span><span class="token operator">*</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// aloca e inicializa com 10</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>p <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment">// saída: 10</span>
+<span class="token keyword">delete</span> p<span class="token punctuation">;</span>
+</code></pre>
+<h4 id="alocando-um-vetor-de-tamanho-fixo">2.2.  Alocando um vetor de tamanho fixo</h4>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token keyword">int</span><span class="token operator">*</span> v <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    v<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> v<span class="token punctuation">;</span>
+</code></pre>
+<h4 id="alocando-um-vetor-de-tamanho-variável">2.3.  Alocando um vetor de tamanho variável</h4>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token keyword">int</span> tamanho<span class="token punctuation">;</span>
+cin <span class="token operator">&gt;&gt;</span> tamanho<span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token operator">*</span> vetor <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>tamanho<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> tamanho<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    vetor<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">100</span><span class="token punctuation">;</span>
+<span class="token keyword">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> vetor<span class="token punctuation">;</span>
+</code></pre>
+<h4 id="matriz-100-dinâmica">2.4. Matriz 100% Dinâmica</h4>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token keyword">int</span> linhas<span class="token punctuation">,</span> colunas<span class="token punctuation">;</span>
+cin <span class="token operator">&gt;&gt;</span> linhas <span class="token operator">&gt;&gt;</span> colunas<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span><span class="token operator">*</span> mat <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>linhas <span class="token operator">*</span> colunas<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> linhas<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> colunas<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+        mat<span class="token punctuation">[</span>i <span class="token operator">*</span> colunas <span class="token operator">+</span> j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">50</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> linhas<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> colunas<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> mat<span class="token punctuation">[</span>i <span class="token operator">*</span> colunas <span class="token operator">+</span> j<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> mat<span class="token punctuation">;</span>
+</code></pre>
+<p><strong>Acesso equivalente a mat[i][j]:</strong></p>
+<ul>
+<li>Use mat[i * colunas + j]</li>
+</ul>
+<h3 id="aritmética-de-ponteiros">3. Aritmética de Ponteiros</h3>
+<p>Como já visto, aritmética de ponteiros permite navegar por elementos de arrays utilizando <strong>incrementos</strong> de endereço de memória. Isso é possível porque, internamente, os elementos de um array são armazenados em <strong>endereços contíguos na memória</strong>.</p>
+<p>Exemplo:</p>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token keyword">int</span><span class="token operator">*</span> v <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>   <span class="token comment">// vetor dinâmico com 5 elementos</span>
+<span class="token keyword">int</span><span class="token operator">*</span> p <span class="token operator">=</span> v<span class="token punctuation">;</span>            <span class="token comment">// ponteiro aponta para o primeiro elemento</span>
+
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">*</span>p <span class="token operator">=</span> i <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">;</span>       <span class="token comment">// atribui valores: 0, 10, 20, 30, 40</span>
+    p<span class="token operator">++</span><span class="token punctuation">;</span>               <span class="token comment">// avança para o próximo elemento</span>
+<span class="token punctuation">}</span>
+p <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>           <span class="token comment">// boa prática: anular ponteiro</span>
+<span class="token keyword">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> v<span class="token punctuation">;</span>            <span class="token comment">// libera memória</span>
+</code></pre>
+<h4 id="como-funciona"><strong>Como funciona?</strong></h4>
+<ul>
+<li>
+<p><code>p = v</code> → p aponta para o mesmo endereço de v[0].</p>
+</li>
+<li>
+<p><code>p++</code> → avança o ponteiro para v[1], v[2], etc.</p>
+</li>
+<li>
+<p><code>*p</code> → acessa o valor da posição apontada.</p>
+</li>
+</ul>
+<blockquote>
+<p>Cada p++ avança o ponteiro do tamanho do tipo (int), ou seja, 4 bytes na maioria dos sistemas.</p>
+</blockquote>
+<h4 id="exemplo-visual"><strong>Exemplo visual:</strong></h4>
+
+<table>
+<thead>
+<tr>
+<th>Índice</th>
+<th>Endereço (exemplo)</th>
+<th>Valor armazenado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v[0]</td>
+<td>0x1000</td>
+<td>0</td>
+</tr>
+<tr>
+<td>v[1]</td>
+<td>0x1004</td>
+<td>10</td>
+</tr>
+<tr>
+<td>v[2]</td>
+<td>0x1008</td>
+<td>20</td>
+</tr>
+<tr>
+<td>v[3]</td>
+<td>0x100C</td>
+<td>30</td>
+</tr>
+<tr>
+<td>v[4]</td>
+<td>0x1010</td>
+<td>40</td>
+</tr>
+</tbody>
+</table><hr>
+<h3 id="resumo">4. Resumo</h3>
+
+<table>
+<thead>
+<tr>
+<th>Conceito</th>
+<th>Função ou Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>new</code></td>
+<td>Aloca memória em tempo de execução</td>
+</tr>
+<tr>
+<td><code>delete</code></td>
+<td>Libera memória alocada para uma variável</td>
+</tr>
+<tr>
+<td><code>delete[]</code></td>
+<td>Libera memória alocada para um vetor</td>
+</tr>
+<tr>
+<td>Ponteiros</td>
+<td>Acessam diretamente os dados alocados dinamicamente</td>
+</tr>
+<tr>
+<td>Aritmética de ponteiros</td>
+<td>Permite navegar em vetores/matrizes usando deslocamento</td>
+</tr>
+</tbody>
+</table><h4 id="diferença-alocação-estática-vs-dinâmica">5.1. Diferença: Alocação Estática vs Dinâmica</h4>
+
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Definição</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estática</td>
+<td>Feita em tempo de compilação</td>
+<td><code>int v[10];</code></td>
+</tr>
+<tr>
+<td>Dinâmica</td>
+<td>Feita em tempo de execução</td>
+<td><code>int* v = new int[n];</code></td>
+</tr>
+</tbody>
+</table><blockquote>
+<p>⚠️ <strong>Cuidados com alocação dinâmica</strong></p>
+<ul>
+<li>Sempre use <code>delete</code> após <code>new</code> para evitar vazamento de memória.</li>
+<li>Nunca use <code>delete</code> duas vezes para o mesmo ponteiro.</li>
+<li>Use <code>delete[]</code> para vetores.</li>
+</ul>
+<blockquote>
+<p>internamente, o <code>new[]</code> aloca espaço contínuo e <code>delete[]</code> sabe liberar toda essa sequência corretamente, enquanto <code>delete</code> apenas libera a primeira célula.</p>
+</blockquote>
+<ul>
+<li>Após liberar, zere o ponteiro: <code>ptr = nullptr;</code>.</li>
+</ul>
+</blockquote>
+<h3 id="📝-5.--exercício-proposto">📝 5.  Exercício Proposto</h3>
+<p>Implemente um programa que:</p>
+<ol>
+<li>Solicita ao usuário um número <code>n</code>.</li>
+<li>Aloca dinamicamente um vetor de <code>n</code> posições.</li>
+<li>Preenche o vetor com valores informados pelo usuário.</li>
+<li>Exibe o vetor invertido.</li>
+<li>Libera a memória alocada.</li>
+</ol>
+<blockquote>
+<p>Use ponteiros para manipular os dados.</p>
+</blockquote>
+</div>
+ <div id="footer-alg2-placeholder"></div>
+
+  <div id="footer-placeholder"></div>
+
+
+  <script>
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+      // Carregar header
+      fetch("../../includes/header.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("header-placeholder").innerHTML = data);
+
+      // Carregar footer
+      fetch("../../includes/footer.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+
+      // Carregar footer - LPOO
+      fetch("includes/footer-alg2.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("footer-alg2-placeholder").innerHTML = data);
+
+      // Carregar header - LPOO
+      fetch("includes/header-alg2.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("header-alg2-placeholder").innerHTML = data);
+    });
+  </script>
+</body>
+
+</html>

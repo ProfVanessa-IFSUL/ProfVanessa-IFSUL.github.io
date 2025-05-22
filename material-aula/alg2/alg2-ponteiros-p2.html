@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALG2 - Aritmética de Ponteiros</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <link rel="stylesheet" href="../../css/estilo.css">
+</head>
+
+<body class="stackedit">
+  <div id="header-placeholder"></div>
+  <div class="container-disciplina">
+    <div id="header-alg2-placeholder"></div>
+<h2 id="ponteiros-em-c-parte-2">Ponteiros em C++: parte 2</h2>
+<h3 id="aritmética-de-ponteiros-em-c">Aritmética de Ponteiros em C++</h3>
+<p>A aritmética de ponteiros é um conceito importante em C++, especialmente ao trabalhar com arrays. Ela permite manipular endereços de memória para acessar e percorrer elementos de forma eficiente.</p>
+<h3 id="o-nome-do-array-como-ponteiro">1. O Nome do Array como Ponteiro</h3>
+<p>Em C++, como visto na parte 1, <strong>o nome de um array é um ponteiro constante para o primeiro elemento do array</strong>. Isso significa que a variável do array representa o endereço de memória onde o primeiro elemento está armazenado.</p>
+<ul>
+<li>Ou seja, um <strong>array</strong> em C++ é, na prática, um ponteiro constante para o primeiro elemento.</li>
+</ul>
+<pre class=" language-c"><code class="prism ++ language-c"><span class="token keyword">int</span> v<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>pVetor <span class="token operator">=</span> v<span class="token punctuation">;</span> <span class="token comment">// equivale a pVetor == &amp;v[0] == v;</span>
+</code></pre>
+<p>Podemos acessar os elementos de duas formas equivalentes:</p>
+<pre class=" language-c"><code class="prism ++ language-c">v<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>      <span class="token comment">// forma tradicional</span>
+<span class="token operator">*</span><span class="token punctuation">(</span>v <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span>  <span class="token comment">// usando aritmética de ponteiros</span>
+</code></pre>
+<h3 id="explicação-array-como-ponteiros-detalhado">1.1. Explicação Array como ponteiros detalhado:</h3>
+<p>Assim, quando se refere a um vetor sem especificar seu índice (somente com o nome da variável), se está referenciando o endereço de memória da 1ª posição de um vetor.</p>
+<p>Por exemplo, se você declarar <code>int v[];</code>, a variável <code>v</code> sozinha representa o endereço do primeiro elemento, que é o mesmo que <code>&amp;v[0]</code>.</p>
+<pre class=" language-c"><code class="prism ++ language-c"><span class="token keyword">int</span> v<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// Exemplo de array</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>pVetor<span class="token punctuation">;</span>
+pVetor <span class="token operator">=</span> <span class="token operator">&amp;</span>v<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// Ponteiro recebe o endereço do primeiro elemento</span>
+<span class="token comment">// OU simplesmente:</span>
+pVetor <span class="token operator">=</span> v<span class="token punctuation">;</span> <span class="token comment">// Ponteiro recebe o endereço do array (primeiro elemento)</span>
+
+</code></pre>
+<p>Assim, as seguintes equivalências são verdadeiras:</p>
+<ul>
+<li><code>v == &amp;v[0]</code>, logo:</li>
+<li><code>*v == v[0]</code> (acessando o valor do primeiro elemento)</li>
+</ul>
+<p>Assim, você pode inicializar um ponteiro para um vetor atribuindo o endereço do primeiro elemento (<code>&amp;v[0]</code>) ou simplesmente o nome do vetor (<code>v</code>), pois o nome do vetor sozinho indica o endereço de memória onde ele inicia.</p>
+<h3 id="operações-aritméticas-com-ponteiros">2. Operações Aritméticas com ponteiros:</h3>
+<p>É possível realizar duas operações com ponteiros: soma e subtração.<br>
+As operações servem para avançar ou retroceder com o ponteiro no endereço de memória correspondente a cada elemento do vetor, para isso é incrementado (ou decrementado) o número de bytes referente ao tipo base do dado que o ponteiro está apontando. (Ex: int = 4 bytes).</p>
+<h4 id="adição-incremento-com-ponteiros-inteiros">2.1. Adição (Incremento) com Ponteiros Inteiros</h4>
+<p>O nome do array é um <strong>ponteiro constante</strong>, o que implica que você <strong>não pode incrementá-lo diretamente</strong>, pois constantes não permitem alteração (por exemplo, <code>v++</code> não é permitido).</p>
+<ul>
+<li>O endereço de memória onde o array começa não é alterado (pois é uma constante).</li>
+<li>No entanto, um ponteiro variável que aponta para o array pode ser incrementado, ou seja: <code>pVetor++</code> é permitido e apontará para o próximo item do vetor.</li>
+</ul>
+<p>Para compreender melhor como funciona um array, e como percorrer um array, utilizando a abordagem de ponteiros, vamos ver algumas formas de utilização:</p>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token keyword">int</span> v<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+ 
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"1. Percorrendo o vetor de forma tradicional (com índice):"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"v["</span> <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">"] = "</span> <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"2. Usando ponteiro variável (auxiliar):"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>pVetor <span class="token operator">=</span> v<span class="token punctuation">;</span> <span class="token comment">// aponta para o 1º elemento do vetor</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token comment">//"Endereço: " &lt;&lt; (pVetor) &lt;&lt; " -&gt; Valor: " &lt;&lt; *pVetor;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"v["</span> <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">"] = "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>pVetor <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+pVetor<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// caminha na memória (próximo elemento)</span>
+<span class="token punctuation">}</span>
+
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"3. Usando aritmética de ponteiros com ponteiro constante:"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token comment">// "Endereço: " &lt;&lt; (v + i) &lt;&lt; " -&gt; Valor: " &lt;&lt; *(v + i);</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"v["</span> <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">"] = "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span><span class="token punctuation">(</span>v <span class="token operator">+</span> i<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token operator">*</span>pVetor <span class="token operator">=</span> v<span class="token punctuation">;</span> <span class="token comment">// retornando pVetor a apontar para o início do vetor v</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"4. Usando aritmética de ponteiros com ponteiro variável (ponteiro auxiliar):"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"v["</span> <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">"] = "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span><span class="token punctuation">(</span>pVetor <span class="token operator">+</span> i<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Vamos explorar essa última abordagem, para compreender como manipular o ponteiro constante que criamos ao criar um vetor:</p>
+<ul>
+<li><code>v + i</code> representa o <strong>endereço do i-ésimo elemento</strong> (índice <code>i</code>) do array <code>v</code>. É equivalente a <code>&amp;v[i]</code>.</li>
+<li><code>*(v + i)</code> representa o <strong>valor (conteúdo) do i-ésimo elemento</strong> (índice <code>i</code>) do array <code>v</code>.
+<ul>
+<li>Lembrando que o operador de desreferência (<code>*</code>) é usado para acessar o conteúdo no endereço apontado.</li>
+</ul>
+</li>
+<li>Esta notação com ponteiros é <strong>equivalente à notação com índice</strong> (<code>[]</code>): <code>v[i]</code>.</li>
+</ul>
+<h4 id="subtração-com-ponteiros-inteiros">2.2. Subtração com Ponteiros Inteiros</h4>
+<p>Assim como é possível usar soma de ponteiros para encontrar a posição do próximo elemento de um array, também podemos usar subtração para ter acesso ao elemento acessível na posição anterior a um elemento do array, ex:</p>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token operator">*</span><span class="token punctuation">(</span>pVetor <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// acessa o valor da posição anterior (válido se pVetor não estiver mais apontando para o primeiro elemento do vetor)</span>
+</code></pre>
+<h3 id="percorrendo-arrays-com-aritmética-de-ponteiros">4. Percorrendo Arrays com Aritmética de Ponteiros</h3>
+<p>Você pode usar a aritmética de ponteiros para percorrer os elementos de um array. Isso pode ser feito de duas formas principais:</p>
+<ul>
+<li><strong>Usando um índice para calcular o deslocamento:</strong> Neste caso, o endereço inicial do ponteiro (que é o nome do array) não é alterado dentro do loop, como visto nos casos 3 e 4 do exemplo acima.</li>
+</ul>
+<p>Exemplo em função:</p>
+<pre class=" language-cpp"><code class="prism  language-cpp">   <span class="token keyword">void</span> <span class="token function">imprimir</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>vet<span class="token punctuation">,</span> <span class="token keyword">int</span> tamanho<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// Recebe o endereço inicial do array</span>
+       <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> tamanho<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span><span class="token punctuation">(</span>vet <span class="token operator">+</span> i<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span> <span class="token comment">// Acessa usando aritmética *(ponteiro + indice)</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li><strong>Incrementando um ponteiro variável:</strong> Aqui, uma variável ponteiro auxiliar é usada e seu endereço é incrementado para apontar para o próximo elemento.</li>
+</ul>
+<p>Exemplo em função:</p>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token keyword">void</span> <span class="token function">imprimir</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>vet<span class="token punctuation">,</span> <span class="token keyword">int</span> tamanho<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// Recebe o endereço inicial do array</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> vet<span class="token punctuation">;</span> p <span class="token operator">&lt;</span> vet <span class="token operator">+</span> tamanho<span class="token punctuation">;</span> p<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// Loop com ponteiro variável 'p'</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>p <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span> <span class="token comment">// Acessa o valor no endereço atual de 'p'</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Neste exemplo, a variável <code>p</code> é inicializada com o endereço do primeiro elemento (<code>vet</code>) e incrementada a cada iteração (<code>p++</code>) para apontar para o próximo elemento. O loop continua enquanto <code>p</code> apontar para um endereço antes do final do array (<code>vet + tamanho</code>).</p>
+<p>Exemplo 2:</p>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token keyword">void</span> <span class="token function">imprimir</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>vet<span class="token punctuation">,</span> <span class="token keyword">int</span> tamanho<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// Recebe o endereço inicial do array</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> tamanho<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// Loop apenas para percorrer a quantidade de elementos do array</span>
+	    cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>vet <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span> <span class="token comment">// Acessa o valor no endereço atual de 'vet'</span>
+	    vet<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// incrementa a posição na memória apontada por vet a cada iteração</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>É importante notar que mesmo ao passar um ponteiro para uma função, a notação com colchetes <code>[]</code> ainda pode ser usada com o parâmetro ponteiro para acessar elementos, e ela funcionará como aritmética de ponteiros por baixo dos panos.</p>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token keyword">void</span> <span class="token function">leitura</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>pVetor<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// Recebe o endereço inicial do array</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> x <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> x<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Informe o valor da posicao ["</span> <span class="token operator">&lt;&lt;</span> x <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"]: "</span><span class="token punctuation">;</span>
+       cin <span class="token operator">&gt;&gt;</span> pVetor<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// Usa notação [] com o ponteiro</span>
+       <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+<h3 id="aplicação-prática">5. Aplicação Prática</h3>
+<p>A aritmética de ponteiros é útil em diversas situações onde é necessário manipular endereços de memória, como manipular elementos de arrays, especialmente quando se deseja acessar elementos sem usar a notação de índice diretamente.</p>
+<p>Um exemplo prático mostrado nos materiais é a troca espelhada de elementos entre dois vetores. Acessar os elementos para a troca é feito utilizando aritmética de ponteiros, como em <code>*(A + i)</code> e <code>*(B + 9 - i)</code>. Isso permite o acesso direto aos endereços para realizar a permuta dos valores.</p>
+<pre class=" language-cpp"><code class="prism  language-cpp"><span class="token comment">// Exemplo de troca espelhada usando aritmética de ponteiros</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">char</span> temp <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>A <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// Acessa valor em A[i] usando aritmética</span>
+    <span class="token operator">*</span><span class="token punctuation">(</span>A <span class="token operator">+</span> i<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>B <span class="token operator">+</span> <span class="token number">9</span> <span class="token operator">-</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// Atribui valor de B[9-i] para A[i] usando aritmética</span>
+    <span class="token operator">*</span><span class="token punctuation">(</span>B <span class="token operator">+</span> <span class="token number">9</span> <span class="token operator">-</span> i<span class="token punctuation">)</span> <span class="token operator">=</span> temp<span class="token punctuation">;</span>       <span class="token comment">// Atribui valor temporário para B[9-i] usando aritmética</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+<p><strong>Atividade:</strong></p>
+<ul>
+<li>Desenvolver uma função que retorne o maior valor de um array de inteiros, utilizando apenas ponteiros (sem usar colchetes <code>[]</code>).</li>
+</ul>
+</div>
+ <div id="footer-alg2-placeholder"></div>
+
+  <div id="footer-placeholder"></div>
+
+
+  <script>
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+      // Carregar header
+      fetch("../../includes/header.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("header-placeholder").innerHTML = data);
+
+      // Carregar footer
+      fetch("../../includes/footer.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+
+      // Carregar footer - LPOO
+      fetch("includes/footer-alg2.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("footer-alg2-placeholder").innerHTML = data);
+
+      // Carregar header - LPOO
+      fetch("includes/header-alg2.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("header-alg2-placeholder").innerHTML = data);
+    });
+  </script>
+</body>
+
+</html>
